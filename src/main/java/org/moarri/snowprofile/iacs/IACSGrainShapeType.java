@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
@@ -122,11 +124,6 @@ public enum IACSGrainShapeType implements CodeableEnum {
         return result;
     }
 
-
-    public static IACSGrainShapeType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSGrainShapeType.class, code);
-        
-    }
 
 
 }

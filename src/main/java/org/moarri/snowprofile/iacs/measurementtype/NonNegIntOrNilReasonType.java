@@ -15,20 +15,34 @@
  *
  */
 
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.iacs.measurementtype;
+
+import org.moarri.snowprofile.iacs.gml.NilReasonEnumeration;
 
 /**
  * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
 
-public class NonExistingCodeException extends Exception {
-    private String code;
+public abstract class NonNegIntOrNilReasonType extends NilReasonType {
 
-    public String getCode() {
-        return code;
+    private int value;
+
+    public int getValue() throws NilValueException {
+        if (isNilReason()) {
+            throw new NilValueException();
+        }
+        return value;
     }
 
-    public NonExistingCodeException(Class enumClass, String code) {
-        super("Non exisiting code '"+code+"' for class:"+enumClass.getCanonicalName());
+    public NonNegIntOrNilReasonType(NilReasonEnumeration nilReason) {
+        super(nilReason);
+    }
+
+    public NonNegIntOrNilReasonType(int value) throws NegativeValueException {
+        super(null);
+        if (value<0) {
+            throw new NegativeValueException();
+        }
+        this.value = value;
     }
 }

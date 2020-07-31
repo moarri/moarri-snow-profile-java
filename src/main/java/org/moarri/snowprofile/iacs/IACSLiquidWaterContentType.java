@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 /**
  *
  * @author Kuba Radliński
@@ -41,10 +43,6 @@ public enum IACSLiquidWaterContentType implements CodeableEnum {
 
     IACSLiquidWaterContentType(String code) {
         this.code = code;
-    }
-
-    public static IACSLiquidWaterContentType valueOfCode(String code)   throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSLiquidWaterContentType.class, code);
     }
 
 }

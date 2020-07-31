@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 /**
  *
  * @author Kuba Radliński
@@ -39,8 +41,5 @@ public enum IACSNilReasonType implements CodeableEnum {
         this.code = code;
     }
 
-    public static IACSNilReasonType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSNilReasonType.class, code);
-    }
 
 }

@@ -14,35 +14,17 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
 
-import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+package org.moarri.snowprofile.iacs.measurementtype;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSAspectCardinalType implements CodeableEnum {
 
-    N("N"),
-    NE("NE"),
-    E("E"),
-    SE("SE"),
-    S("S"),
-    SW("SW"),
-    W("W"),
-    NW("NW"),
-    N_A("n/a");
-    private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
+public interface FixedUom<E> {
+    default boolean isFixedUom(){
+        return true;
     }
 
-    IACSAspectCardinalType(String code) {
-        this.code = code;
-    }
-
-
+    E fixedUom();
 }

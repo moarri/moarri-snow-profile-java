@@ -14,13 +14,15 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.iacs.unittype;
+
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
  *
  * @author Kuba Radliński
  */
-public enum IACSUnitsPressureType implements CodeableEnum{
+public enum UomPressureType implements CodeableEnum, Uom {
 
     NM2("Nm-2"),
     PA("Pa");
@@ -32,12 +34,8 @@ public enum IACSUnitsPressureType implements CodeableEnum{
         return code;
     }
 
-    IACSUnitsPressureType(String code) {
+    UomPressureType(String code) {
         this.code = code;
-    }
-    
-    public static IACSUnitsPressureType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsPressureType.class, code);
     }
     
 }

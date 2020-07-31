@@ -16,7 +16,9 @@
  */
 package org.moarri.snowprofile.iacs;
 
-public enum IACSSkyConditionType implements CodeableEnum{
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
+public enum IACSSkyConditionType implements CodeableEnum {
 
     CLR("CLR"),
     FEW("FEW"),
@@ -35,10 +37,5 @@ public enum IACSSkyConditionType implements CodeableEnum{
     IACSSkyConditionType(String code) {
         this.code = code;
     }
-    
-    public static IACSSkyConditionType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSSkyConditionType.class, code);
-    }
-    
     
 }

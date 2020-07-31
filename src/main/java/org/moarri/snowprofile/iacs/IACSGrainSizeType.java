@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 /**
  *
  * @author Kuba Radliński
@@ -35,8 +37,6 @@ public enum IACSGrainSizeType implements CodeableEnum {
         this.code = code;
     }
     
-    public static IACSGrainSizeType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSGrainSizeType.class, code);
-    }
+
 
 }

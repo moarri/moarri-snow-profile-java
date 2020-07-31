@@ -1277,7 +1277,7 @@
 	<!--*** LAYER AND POINT OBS TYPE DEFINITIONS               ***-->
 	<!--**********************************************************-->
 
-	<complexType name="LayerPointObsRootType">
+	<complexType name="LayerPointObsRoot">
 		<sequence>
 			<element name="metaData" type="caaml:MetaDataBaseType" minOccurs="0"/>
 		</sequence>
@@ -1295,7 +1295,7 @@
 			</extension>
 		</complexContent>
 	</complexType>
-	<complexType name="LayerInProfileBaseType">
+	<complexType name="LayerInProfileBase">
 		<complexContent>
 			<extension base="caaml:LayerPointObsRootType">
 				<sequence>

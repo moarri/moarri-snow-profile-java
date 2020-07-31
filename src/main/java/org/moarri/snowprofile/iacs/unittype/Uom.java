@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2020 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,35 +14,12 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
 
-import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+package org.moarri.snowprofile.iacs.unittype;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSAspectCardinalType implements CodeableEnum {
 
-    N("N"),
-    NE("NE"),
-    E("E"),
-    SE("SE"),
-    S("S"),
-    SW("SW"),
-    W("W"),
-    NW("NW"),
-    N_A("n/a");
-    private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    IACSAspectCardinalType(String code) {
-        this.code = code;
-    }
-
-
+public interface Uom {
 }

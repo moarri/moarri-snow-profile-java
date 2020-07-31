@@ -17,6 +17,8 @@
 
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 /**
  * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
@@ -65,7 +67,5 @@ public enum IACSComprTestScoreNumType implements CodeableEnum {
         this.code = code;
     }
 
-    public static IACSComprTestScoreNumType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSComprTestScoreNumType.class, code);
-    }
+
 }

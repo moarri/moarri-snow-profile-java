@@ -14,31 +14,12 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.iacs.measurementtype;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSUnitsWindSpdType implements CodeableEnum{
 
-    MS1("ms-1"),
-    EMPTY("");
-    
-    private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    IACSUnitsWindSpdType(String code) {
-        this.code = code;
-    }
-    
-    public static IACSUnitsWindSpdType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsWindSpdType.class, code);
-    }
-    
-    
+public class NegativeValueException extends Exception {
 }

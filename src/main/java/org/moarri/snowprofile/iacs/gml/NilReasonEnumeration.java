@@ -14,33 +14,31 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.iacs.gml;
 
 import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSAspectCardinalType implements CodeableEnum {
 
-    N("N"),
-    NE("NE"),
-    E("E"),
-    SE("SE"),
-    S("S"),
-    SW("SW"),
-    W("W"),
-    NW("NW"),
-    N_A("n/a");
-    private final String code;
+public enum NilReasonEnumeration implements CodeableEnum {
+    INAPPLICABLE("inapplicable"),
+    MISSING("missing"),
+    TEMPLATE("template"),
+    UNKNOWN("unknown"),
+    WITHHELD("withheld");
+
+
+    private String code;
 
     @Override
     public String getCode() {
         return code;
     }
 
-    IACSAspectCardinalType(String code) {
+    NilReasonEnumeration(String code) {
         this.code = code;
     }
 

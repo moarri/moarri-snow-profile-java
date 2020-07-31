@@ -14,29 +14,12 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.caaml.engine.nodetools;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSUnitsSpecSurfAreaType implements CodeableEnum{
 
-    M2KG1("m2kg-1");
-    
-    private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    IACSUnitsSpecSurfAreaType(String code) {
-        this.code = code;
-    }
-    
-    public static IACSUnitsSpecSurfAreaType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsSpecSurfAreaType.class, code);
-    }
-    
+public class CaamlClassException extends Exception {
 }

@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 import java.util.EnumSet;
 /**
  *
@@ -65,8 +67,5 @@ public enum IACSHardnessType implements CodeableEnum {
         this.hardness = hardness;
     }
 
-    public static IACSHardnessType valueOfCode(String code)   throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSHardnessType.class, code);
-    }
 
 }

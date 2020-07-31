@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 /**
  *
  * @author Kuba Radliński
@@ -37,10 +39,6 @@ public enum IACSSurfaceRoughnessType implements CodeableEnum {
 
     IACSSurfaceRoughnessType(String code) {
         this.code = code;
-    }
-
-    public static IACSSurfaceRoughnessType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSSurfaceRoughnessType.class, code);
     }
 
 }

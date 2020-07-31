@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 /**
  *
  * @author Kuba Radliński
@@ -59,10 +61,6 @@ public enum IACSPrecipTIType implements CodeableEnum {
 
     IACSPrecipTIType(String code) {
         this.code = code;
-    }
-
-    public static IACSPrecipTIType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSPrecipTIType.class, code);
     }
 
 }

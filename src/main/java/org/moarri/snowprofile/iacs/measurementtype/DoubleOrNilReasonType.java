@@ -14,30 +14,32 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.iacs.measurementtype;
+
+import org.moarri.snowprofile.iacs.gml.NilReasonEnumeration;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSUnitsForceType implements CodeableEnum{
 
-    N("N"),
-    EMPTY("");
-    
-    private final String code;
+public abstract class DoubleOrNilReasonType extends NilReasonType {
 
-    @Override
-    public String getCode() {
-        return code;
+    private double value;
+
+    public double getValue() throws NilValueException {
+        if (isNilReason()) {
+            throw new NilValueException();
+        }
+        return value;
     }
 
-    IACSUnitsForceType(String code) {
-        this.code = code;
+    public DoubleOrNilReasonType(NilReasonEnumeration nilReason) {
+        super(nilReason);
     }
-    
-    public static IACSUnitsForceType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsForceType.class, code);
+
+    public DoubleOrNilReasonType(double value) {
+        super(null);
+        this.value = value;
     }
-    
 }

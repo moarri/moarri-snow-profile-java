@@ -14,30 +14,19 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.caaml.engine.nodetools;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSUnitsLwcType implements CodeableEnum{
 
-    PRCVOL("% per Vol"),
-    EMPTY("");
-    
-    private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
+public class AttributeProcessor {
+    public static String trimAttribute(String attr) {
+        if (attr == null) {
+            return null;
+        }
+        return attr.trim();
     }
 
-    IACSUnitsLwcType(String code) {
-        this.code = code;
-    }
-    
-    public static IACSUnitsLwcType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsLwcType.class, code);
-    }
-    
 }

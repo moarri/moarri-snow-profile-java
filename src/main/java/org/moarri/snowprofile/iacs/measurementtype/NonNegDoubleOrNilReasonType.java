@@ -15,14 +15,26 @@
  *
  */
 
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.iacs.measurementtype;
+
+import org.moarri.snowprofile.iacs.gml.NilReasonEnumeration;
 
 /**
- *
- * @author Kuba Radliński <kuba at harpy.pl>
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
 
+public abstract class NonNegDoubleOrNilReasonType extends DoubleOrNilReasonType {
 
-public interface CodeableEnum<E extends Enum<E>> {
-   String getCode();
+    public NonNegDoubleOrNilReasonType(NilReasonEnumeration nilReason) {
+        super(nilReason);
+    }
+
+    public NonNegDoubleOrNilReasonType(double value) throws NegativeValueException {
+        super(value);
+        if (value<0.0){
+            throw new NegativeValueException();
+        }
+    }
+
+
 }

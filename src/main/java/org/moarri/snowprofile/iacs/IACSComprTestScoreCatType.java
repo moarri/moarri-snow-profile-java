@@ -17,11 +17,13 @@
 
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 /**
  * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
 
-public enum IACSComprTestScoreCatType implements CodeableEnum  {
+public enum IACSComprTestScoreCatType implements CodeableEnum {
     CTV("CTV"),
     CTE("CTE"),
     CTM("CTM"),
@@ -37,7 +39,4 @@ public enum IACSComprTestScoreCatType implements CodeableEnum  {
         this.code = code;
     }
 
-    public static IACSComprTestScoreCatType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSComprTestScoreCatType.class, code);
-    }
 }

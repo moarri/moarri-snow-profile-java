@@ -14,15 +14,18 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.iacs.unittype;
+
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
  *
  * @author Kuba Radliński
  */
-public enum IACSUnitsWeightType implements CodeableEnum{
+public enum UomLwcType implements CodeableEnum, Uom {
 
-    KG("kg");
+    PRCVOL("% per Vol"),
+    EMPTY("");
     
     private final String code;
 
@@ -31,12 +34,9 @@ public enum IACSUnitsWeightType implements CodeableEnum{
         return code;
     }
 
-    IACSUnitsWeightType(String code) {
+    UomLwcType(String code) {
         this.code = code;
     }
     
-    public static IACSUnitsWeightType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsWeightType.class, code);
-    }
-    
+
 }

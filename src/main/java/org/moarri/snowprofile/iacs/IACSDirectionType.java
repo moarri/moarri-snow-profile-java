@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.iacs;
 
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+
 /**
  *
  * @author Kuba Radliński
@@ -35,8 +37,5 @@ public enum IACSDirectionType implements CodeableEnum {
         this.code = code;
     }
     
-    public static IACSDirectionType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSDirectionType.class, code);
-    }
 
 }

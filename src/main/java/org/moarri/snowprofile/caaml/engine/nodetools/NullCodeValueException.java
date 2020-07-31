@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2020 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,15 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.caaml.engine.nodetools;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSUnitsUnitType implements CodeableEnum{
 
-    ONE("1");
-    
-    private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
+public class NullCodeValueException extends Exception {
+    public NullCodeValueException(Class enumClass) {
+        super("Null code for class:"+enumClass.getCanonicalName());
     }
-
-    IACSUnitsUnitType(String code) {
-        this.code = code;
-    }
-    
-    public static IACSUnitsUnitType valueOfCode(String code)  throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsUnitType.class, code);
-    }
-    
 }

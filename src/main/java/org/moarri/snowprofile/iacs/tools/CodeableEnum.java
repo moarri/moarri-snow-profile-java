@@ -14,30 +14,15 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.iacs.tools;
 
 /**
  *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba at harpy.pl>
  */
-public enum IACSUnitsDensityType implements CodeableEnum{
 
-    KGM3("kgm-3");
-    
-    private final String code;
 
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    IACSUnitsDensityType(String code) {
-        this.code = code;
-    }
-    
-    public static IACSUnitsDensityType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsDensityType.class, code);
-    }
-    
-    
+public interface CodeableEnum<E extends Enum<E>> {
+   String getCode();
 }

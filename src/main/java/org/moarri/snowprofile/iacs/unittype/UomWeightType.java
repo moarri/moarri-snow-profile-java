@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.iacs.unittype;
 
 import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
@@ -22,17 +22,10 @@ import org.moarri.snowprofile.iacs.tools.CodeableEnum;
  *
  * @author Kuba Radliński
  */
-public enum IACSAspectCardinalType implements CodeableEnum {
+public enum UomWeightType implements CodeableEnum, Uom {
 
-    N("N"),
-    NE("NE"),
-    E("E"),
-    SE("SE"),
-    S("S"),
-    SW("SW"),
-    W("W"),
-    NW("NW"),
-    N_A("n/a");
+    KG("kg");
+    
     private final String code;
 
     @Override
@@ -40,9 +33,9 @@ public enum IACSAspectCardinalType implements CodeableEnum {
         return code;
     }
 
-    IACSAspectCardinalType(String code) {
+    UomWeightType(String code) {
         this.code = code;
     }
-
+    
 
 }

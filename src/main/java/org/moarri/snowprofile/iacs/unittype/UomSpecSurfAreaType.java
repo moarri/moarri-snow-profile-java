@@ -14,19 +14,17 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.iacs.unittype;
+
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
  *
  * @author Kuba Radliński
  */
-public enum IACSUnitsLengthType implements CodeableEnum{
+public enum UomSpecSurfAreaType implements CodeableEnum, Uom {
 
-    CM("cm"),
-    MM("mm"),
-    M("m"),
-    IN("in"),
-    FT("ft");
+    M2KG1("m2kg-1");
     
     private final String code;
 
@@ -35,12 +33,9 @@ public enum IACSUnitsLengthType implements CodeableEnum{
         return code;
     }
 
-    IACSUnitsLengthType(String code) {
+    UomSpecSurfAreaType(String code) {
         this.code = code;
     }
     
-    public static IACSUnitsLengthType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsLengthType.class, code);
-    }
-    
+
 }

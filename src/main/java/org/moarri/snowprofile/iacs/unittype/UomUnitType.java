@@ -14,15 +14,17 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.iacs.unittype;
+
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
  *
  * @author Kuba Radliński
  */
-public enum IACSUnitsTempType implements CodeableEnum{
+public enum UomUnitType implements CodeableEnum, Uom {
 
-    DEGC("degC");
+    ONE("1");
     
     private final String code;
 
@@ -31,13 +33,8 @@ public enum IACSUnitsTempType implements CodeableEnum{
         return code;
     }
 
-    IACSUnitsTempType(String code) {
+    UomUnitType(String code) {
         this.code = code;
     }
-
-    public static IACSUnitsTempType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsTempType.class, code);
-    }
-    
     
 }

@@ -15,14 +15,28 @@
  *
  */
 
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.iacs.unittype;
+
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
  * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
 
-public class NullCodeValueException extends Exception {
-    public NullCodeValueException(Class enumClass) {
-        super("Null code for class:"+enumClass.getCanonicalName());
+public enum UomMassUnitAreaType implements CodeableEnum, Uom {
+    KG2("kgm-2");
+
+    private String code;
+
+    @Override
+    public String getCode() {
+        return code;
     }
+
+
+    UomMassUnitAreaType(String code) {
+        this.code = code;
+    }
+
+
 }

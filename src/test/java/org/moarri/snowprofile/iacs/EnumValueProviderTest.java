@@ -18,13 +18,17 @@
 package org.moarri.snowprofile.iacs;
 
 import org.junit.Test;
+import org.moarri.snowprofile.caaml.engine.nodetools.NonExistingCodeException;
+import org.moarri.snowprofile.caaml.engine.nodetools.NullCodeValueException;
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+import org.moarri.snowprofile.iacs.tools.EnumValueProvider;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 public class EnumValueProviderTest {
 
-    enum TestEnum implements CodeableEnum<TestEnum>{
+    enum TestEnum implements CodeableEnum<TestEnum> {
         VALUE1("codeVal1"),
         VALUE2("codeVal2");
 

@@ -14,28 +14,31 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.iacs.unittype;
+
+import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba.radlinski at harpy.pl >
  */
-public enum IACSUnitsAreaType implements CodeableEnum {
 
-    M2("m2");
+public enum UomFractionType implements CodeableEnum, Uom {
+    PRC("%"),
+    PPM("ppm"),
+    PPB("ppb");
 
-    private final String code;
+    private String code;
 
     @Override
     public String getCode() {
         return code;
     }
 
-    IACSUnitsAreaType(String code) {
+
+    UomFractionType(String code) {
         this.code = code;
     }
 
-    public static IACSUnitsAreaType valueOfCode(String code) throws NullCodeValueException, NonExistingCodeException {
-        return EnumValueProvider.valueOfCode(IACSUnitsAreaType.class, code);
-    }
 
 }
