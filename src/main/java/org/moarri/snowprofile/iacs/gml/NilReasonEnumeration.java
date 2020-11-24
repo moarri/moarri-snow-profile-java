@@ -20,7 +20,7 @@ package org.moarri.snowprofile.iacs.gml;
 import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public enum NilReasonEnumeration implements CodeableEnum {

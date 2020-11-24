@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public abstract class MeasurementTypeTranslator {

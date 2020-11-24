@@ -18,7 +18,7 @@
 package org.moarri.snowprofile.iacs.measurementtype;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public interface FixedUom<E> {

@@ -18,7 +18,7 @@
 package org.moarri.snowprofile.caaml.profile;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public class LayerInProfileBase extends LayerPointObsRoot {

@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 

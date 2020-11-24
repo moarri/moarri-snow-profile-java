@@ -20,7 +20,7 @@ package org.moarri.snowprofile.iacs.measurementtype;
 import org.moarri.snowprofile.iacs.gml.NilReasonEnumeration;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public abstract class DoubleOrNilReasonType extends NilReasonType {

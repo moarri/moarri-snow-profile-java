@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
 import java.util.Arrays;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public class CodeableEnumTranslator {

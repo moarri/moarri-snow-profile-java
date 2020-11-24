@@ -25,7 +25,7 @@ import java.io.InputStream;
 import java.io.Reader;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public class Input implements LSInput {

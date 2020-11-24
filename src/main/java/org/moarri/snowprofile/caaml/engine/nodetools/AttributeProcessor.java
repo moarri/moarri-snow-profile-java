@@ -18,7 +18,7 @@
 package org.moarri.snowprofile.caaml.engine.nodetools;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public class AttributeProcessor {

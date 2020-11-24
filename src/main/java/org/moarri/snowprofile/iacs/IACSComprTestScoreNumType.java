@@ -20,7 +20,7 @@ package org.moarri.snowprofile.iacs;
 import org.moarri.snowprofile.iacs.tools.CodeableEnum;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public enum IACSComprTestScoreNumType implements CodeableEnum {

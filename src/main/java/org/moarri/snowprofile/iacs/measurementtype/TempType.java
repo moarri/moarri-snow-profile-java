@@ -21,7 +21,7 @@ import org.moarri.snowprofile.iacs.gml.NilReasonEnumeration;
 import org.moarri.snowprofile.iacs.unittype.UomTempType;
 
 /**
- * @author Kuba Radliński <kuba.radlinski at harpy.pl >
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public class TempType extends TempOrNilReasonType implements FixedUom {
