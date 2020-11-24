@@ -33,14 +33,13 @@ import java.util.logging.Logger;
 import static org.junit.Assert.*;
 
 public class CaamlValidatorTest {
-    private static String TEST_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950.xml";
-    private static String TEST_WRONG_ELEMENT_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950-wrong-element.xml";
-    private static String TEST_WRONG_VERSION_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950-wrong-version.xml";
+    private static final String TEST_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950.xml";
+    private static final String TEST_WRONG_ELEMENT_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950-wrong-element.xml";
+    private static final String TEST_WRONG_VERSION_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950-wrong-version.xml";
 
     @Test
     public void validateProperCaaml() {
-        try {
-            InputStream is = this.getClass().getResourceAsStream(TEST_CAAML_FILE);
+        try (InputStream is = this.getClass().getResourceAsStream(TEST_CAAML_FILE)) {
             String caamlText = TextFileReader.readFromInputStream(is);
             ValidationResult expectedResult = new ValidationResult(ValidationResultType.VALIDATION_OK, CaamlVersion.V_6_0_3, "");
             ValidationResult result = CaamlValidator.validateCaaml(caamlText);
@@ -52,8 +51,7 @@ public class CaamlValidatorTest {
 
     @Test
     public void validateWrongElementCaaml() {
-        try {
-            InputStream is = this.getClass().getResourceAsStream(TEST_WRONG_ELEMENT_CAAML_FILE);
+        try (InputStream is = this.getClass().getResourceAsStream(TEST_WRONG_ELEMENT_CAAML_FILE)) {
             String caamlText = TextFileReader.readFromInputStream(is);
             ValidationResult expectedResult = new ValidationResult(ValidationResultType.XML_VALIDATION_ERROR, CaamlVersion.V_6_0_3, "");
             ValidationResult result = CaamlValidator.validateCaaml(caamlText);
@@ -65,8 +63,7 @@ public class CaamlValidatorTest {
 
     @Test
     public void validateWrongVersionCaaml() {
-        try {
-            InputStream is = this.getClass().getResourceAsStream(TEST_WRONG_VERSION_CAAML_FILE);
+        try (InputStream is = this.getClass().getResourceAsStream(TEST_WRONG_VERSION_CAAML_FILE)) {
             String caamlText = TextFileReader.readFromInputStream(is);
             ValidationResult expectedResult = new ValidationResult(ValidationResultType.CAAML_UNSUPORTED_VERSION, null, "");
             ValidationResult result = CaamlValidator.validateCaaml(caamlText);
