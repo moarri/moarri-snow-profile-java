@@ -61,7 +61,7 @@ class CaamlValidator {
             doc.getDocumentElement().normalize();
             Element rootElement = doc.getDocumentElement();
             String caamlAttributeString = rootElement.getAttribute("xmlns:caaml");
-            if (caamlAttributeString == null | caamlAttributeString.isEmpty()){
+            if (caamlAttributeString == null || caamlAttributeString.isEmpty()){
                 return new ValidationResult(ValidationResultType.XML_VALIDATION_ERROR, null, "No xmlns:caaml attribute");
             }
             String [] parts = caamlAttributeString.split("/");
