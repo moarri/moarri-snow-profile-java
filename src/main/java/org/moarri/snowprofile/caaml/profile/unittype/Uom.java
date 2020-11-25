@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2020 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,33 +14,12 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
 
-import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
+package org.moarri.snowprofile.caaml.profile.unittype;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public enum IACSWindSpdType implements CodeableEnum {
-
-    C("C"),
-    L("L"),
-    M("M"),
-    S("S"),
-    X("X");
-    
-    private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    IACSWindSpdType(String code) {
-        this.code = code;
-    }
-
-
+public interface Uom {
 }

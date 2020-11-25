@@ -17,7 +17,7 @@
 
 package org.moarri.snowprofile.iacs;
 
-import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >

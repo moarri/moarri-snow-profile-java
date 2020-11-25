@@ -14,32 +14,26 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
 
-import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
+package org.moarri.snowprofile.caaml.profile.measurementtype;
+
+import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.NegativeValueException;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public enum IACSWindSpdType implements CodeableEnum {
+public abstract class NonNegDoubleOrNilReasonType extends DoubleOrNilReasonType {
 
-    C("C"),
-    L("L"),
-    M("M"),
-    S("S"),
-    X("X");
-    
-    private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
+    public NonNegDoubleOrNilReasonType(NilReasonEnumeration nilReason) {
+        super(nilReason);
     }
 
-    IACSWindSpdType(String code) {
-        this.code = code;
+    public NonNegDoubleOrNilReasonType(double value) throws NegativeValueException {
+        super(value);
+        if (value<0.0){
+            throw new NegativeValueException();
+        }
     }
 
 

@@ -16,7 +16,7 @@
  */
 package org.moarri.snowprofile.iacs;
 
-import org.moarri.snowprofile.iacs.tools.CodeableEnum;
+import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 import java.util.EnumSet;
 import java.util.HashSet;

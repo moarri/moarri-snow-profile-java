@@ -15,28 +15,31 @@
  *
  */
 
-package org.moarri.snowprofile.iacs;
+package org.moarri.snowprofile.caaml.profile.measurementtype;
 
-import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
+import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.NilValueException;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public enum IACSComprTestScoreCatType implements CodeableEnum {
-    CTV("CTV"),
-    CTE("CTE"),
-    CTM("CTM"),
-    CTH("CTH");
-    private String code;
+public abstract class DoubleOrNilReasonType extends NilReasonType {
 
-    @Override
-    public String getCode() {
-        return code;
+    private double value;
+
+    public double getValue() throws NilValueException {
+        if (isNilReason()) {
+            throw new NilValueException();
+        }
+        return value;
     }
 
-    IACSComprTestScoreCatType(String code) {
-        this.code = code;
+    public DoubleOrNilReasonType(NilReasonEnumeration nilReason) {
+        super(nilReason);
     }
 
+    public DoubleOrNilReasonType(double value) {
+        super(null);
+        this.value = value;
+    }
 }

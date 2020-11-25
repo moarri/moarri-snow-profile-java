@@ -17,9 +17,9 @@
 
 package org.moarri.snowprofile.caaml.engine.nodetools;
 
-import org.moarri.snowprofile.iacs.tools.CodeableEnum;
-import org.moarri.snowprofile.iacs.tools.EnumValueProvider;
-import org.moarri.snowprofile.iacs.unittype.Uom;
+import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
+import org.moarri.snowprofile.caaml.baseenum.EnumValueProvider;
+import org.moarri.snowprofile.caaml.profile.unittype.Uom;
 import org.w3c.dom.Element;
 
 import java.util.Arrays;

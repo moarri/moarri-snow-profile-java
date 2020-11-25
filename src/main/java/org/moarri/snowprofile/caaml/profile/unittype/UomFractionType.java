@@ -14,31 +14,29 @@
  * limitations under the License.
  *
  */
-package org.moarri.snowprofile.iacs;
+
+package org.moarri.snowprofile.caaml.profile.unittype;
 
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
- *
- * @author Kuba Radliński
+ * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public enum IACSWindSpdType implements CodeableEnum {
+public enum UomFractionType implements CodeableEnum, Uom {
+    PRC("%"),
+    PPM("ppm"),
+    PPB("ppb");
 
-    C("C"),
-    L("L"),
-    M("M"),
-    S("S"),
-    X("X");
-    
-    private final String code;
+    private String code;
 
     @Override
     public String getCode() {
         return code;
     }
 
-    IACSWindSpdType(String code) {
+
+    UomFractionType(String code) {
         this.code = code;
     }
 
