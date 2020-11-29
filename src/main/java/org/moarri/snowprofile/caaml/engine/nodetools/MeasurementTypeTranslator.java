@@ -22,7 +22,7 @@ import org.moarri.snowprofile.caaml.profile.measurementtype.FixedUom;
 import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.UomWrongUnitException;
 import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.NegativeValueException;
 import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.ValueOutsideRangeException;
-import org.moarri.snowprofile.caaml.profile.measurementtype.NilReasonEnumeration;
+import org.moarri.snowprofile.caaml.gml.NilReasonEnumeration;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 import org.moarri.snowprofile.caaml.profile.unittype.Uom;
 import org.w3c.dom.Element;

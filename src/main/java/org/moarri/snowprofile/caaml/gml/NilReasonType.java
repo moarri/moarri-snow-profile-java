@@ -15,7 +15,7 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.profile.measurementtype;
+package org.moarri.snowprofile.caaml.gml;
 
 import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.NonNilException;
 
@@ -23,9 +23,9 @@ import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.NonNilExc
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-abstract class NilReasonType {
+public abstract class NilReasonType {
 
-    NilReasonEnumeration nilReason;
+    private final NilReasonEnumeration nilReason;
 
     public NilReasonEnumeration getNilReason() throws NonNilException{
         if (!isNilReason()){
@@ -38,7 +38,7 @@ abstract class NilReasonType {
         return nilReason != null;
     }
 
-    NilReasonType(NilReasonEnumeration nilReason) {
+    protected NilReasonType(NilReasonEnumeration nilReason) {
         this.nilReason = nilReason;
     }
 

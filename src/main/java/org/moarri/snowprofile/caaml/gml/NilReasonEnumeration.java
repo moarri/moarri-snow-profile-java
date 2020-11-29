@@ -15,7 +15,7 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.profile.measurementtype;
+package org.moarri.snowprofile.caaml.gml;
 
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
@@ -31,7 +31,7 @@ public enum NilReasonEnumeration implements CodeableEnum {
     WITHHELD("withheld");
 
 
-    private String code;
+    private final String code;
 
     @Override
     public String getCode() {

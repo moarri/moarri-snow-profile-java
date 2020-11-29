@@ -17,6 +17,8 @@
 
 package org.moarri.snowprofile.caaml.profile.measurementtype;
 
+import org.moarri.snowprofile.caaml.gml.NilReasonType;
+import org.moarri.snowprofile.caaml.gml.NilReasonEnumeration;
 import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.NilValueException;
 import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.NegativeValueException;
 
