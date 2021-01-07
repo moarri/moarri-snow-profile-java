@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2021 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,35 @@
  * limitations under the License.
  *
  */
+package org.moarri.snowprofile.caaml.profile;
 
-package org.moarri.snowprofile.caaml.engine.nodetools;
+import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
- * @author Kuba Radliński <kuba at radlinski.eu >
+ *
+ * @author Kuba Radliński
  */
+public enum AspectCardinalType implements CodeableEnum {
 
-public class CaamlClassException extends Exception {
+    N("N"),
+    NE("NE"),
+    E("E"),
+    SE("SE"),
+    S("S"),
+    SW("SW"),
+    W("W"),
+    NW("NW"),
+    N_A("n/a");
+    private final String code;
 
-    public CaamlClassException(Throwable cause) {
-        super(cause);
+    @Override
+    public String getCode() {
+        return code;
     }
-    
+
+    AspectCardinalType(String code) {
+        this.code = code;
+    }
+
+
 }

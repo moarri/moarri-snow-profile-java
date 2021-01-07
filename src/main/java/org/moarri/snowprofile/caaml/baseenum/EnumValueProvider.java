@@ -27,7 +27,10 @@ public class EnumValueProvider {
         if (code == null) {
             throw new NullCodeValueException(enumClass);
         }
-        return Arrays.stream(enumClass.getEnumConstants()).filter(ec -> (ec.getCode().equals(code))).findAny().orElseThrow(() -> (new NonExistingCodeException(enumClass, code)));
+        return Arrays.stream(enumClass.getEnumConstants())
+                .filter(ec -> (ec.getCode().equals(code)))
+                .findAny()
+                .orElseThrow(() -> (new NonExistingCodeException(enumClass, code)));
     }
 
 }

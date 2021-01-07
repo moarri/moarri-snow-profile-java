@@ -17,14 +17,14 @@
 
 package org.moarri.snowprofile.caaml.engine.nodetools;
 
-import org.moarri.snowprofile.caaml.profile.measurementtype.DoubleOrNilReasonType;
-import org.moarri.snowprofile.caaml.profile.measurementtype.FixedUom;
-import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.UomWrongUnitException;
-import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.NegativeValueException;
-import org.moarri.snowprofile.caaml.profile.measurementtype.exceptions.ValueOutsideRangeException;
+import org.moarri.snowprofile.caaml.profile.DoubleOrNilReasonType;
+import org.moarri.snowprofile.caaml.profile.FixedUom;
+import org.moarri.snowprofile.caaml.profile.UomWrongUnitException;
+import org.moarri.snowprofile.caaml.profile.NegativeValueException;
+import org.moarri.snowprofile.caaml.profile.ValueOutsideRangeException;
 import org.moarri.snowprofile.caaml.gml.NilReasonEnumeration;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
-import org.moarri.snowprofile.caaml.profile.unittype.Uom;
+import org.moarri.snowprofile.caaml.profile.Uom;
 import org.w3c.dom.Element;
 
 import java.lang.reflect.InvocationTargetException;
@@ -44,12 +44,10 @@ public abstract class MeasurementTypeTranslator {
             try {
                 return measClass.getConstructor(Double.class).newInstance(initialValue);
             } catch (InstantiationException  | InvocationTargetException | NoSuchMethodException | IllegalAccessException ex1) {
-                ex1.printStackTrace();
-                throw new CaamlClassException();
+                throw new CaamlClassException(ex1);
             }
         } catch (InstantiationException  | InvocationTargetException | NoSuchMethodException | IllegalAccessException ex2) {
-            ex2.printStackTrace();
-            throw new CaamlClassException();
+            throw new CaamlClassException(ex2);
         }
     }
 
@@ -63,12 +61,10 @@ public abstract class MeasurementTypeTranslator {
             try {
                 return measClass.getConstructor(Double.class, Uom.class).newInstance(initialValue, uom);
             } catch (InstantiationException  | InvocationTargetException | NoSuchMethodException | IllegalAccessException ex1) {
-                ex1.printStackTrace();
-                throw new CaamlClassException();
+                throw new CaamlClassException(ex1);
             }
         } catch (InstantiationException  | InvocationTargetException | NoSuchMethodException | IllegalAccessException ex2) {
-            ex2.printStackTrace();
-            throw new CaamlClassException();
+            throw new CaamlClassException(ex2);
         }
 
     }

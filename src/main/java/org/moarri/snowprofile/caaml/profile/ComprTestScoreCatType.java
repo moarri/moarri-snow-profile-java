@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2021 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,28 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.gml;
+package org.moarri.snowprofile.caaml.profile;
 
-import org.moarri.snowprofile.caaml.profile.NonNilException;
+import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public abstract class NilReasonType {
+public enum ComprTestScoreCatType implements CodeableEnum {
+    CTV("CTV"),
+    CTE("CTE"),
+    CTM("CTM"),
+    CTH("CTH");
+    private String code;
 
-    private final NilReasonEnumeration nilReason;
-
-    public NilReasonEnumeration getNilReason() throws NonNilException{
-        if (!isNilReason()){
-            throw new NonNilException();
-        }
-        return nilReason;
+    @Override
+    public String getCode() {
+        return code;
     }
 
-    public boolean isNilReason(){
-        return nilReason != null;
-    }
-
-    protected NilReasonType(NilReasonEnumeration nilReason) {
-        this.nilReason = nilReason;
+    ComprTestScoreCatType(String code) {
+        this.code = code;
     }
 
 }

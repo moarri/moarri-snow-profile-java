@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2021 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,25 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.engine.nodetools;
+package org.moarri.snowprofile.caaml.profile;
 
 /**
- * @author Kuba Radliński <kuba at radlinski.eu >
+ * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public class CaamlClassException extends Exception {
+public abstract class CaamlException extends Exception {
+    public CaamlException() {
+    }
 
-    public CaamlClassException(Throwable cause) {
+    public CaamlException(String message) {
+        super(message);
+    }
+
+    public CaamlException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public CaamlException(Throwable cause) {
         super(cause);
     }
-    
 }

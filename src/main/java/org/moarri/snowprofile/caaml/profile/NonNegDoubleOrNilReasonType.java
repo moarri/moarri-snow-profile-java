@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2021 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,26 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.gml;
+package org.moarri.snowprofile.caaml.profile;
 
-import org.moarri.snowprofile.caaml.profile.NonNilException;
+import org.moarri.snowprofile.caaml.gml.NilReasonEnumeration;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public abstract class NilReasonType {
+public abstract class NonNegDoubleOrNilReasonType extends DoubleOrNilReasonType {
 
-    private final NilReasonEnumeration nilReason;
+    public NonNegDoubleOrNilReasonType(NilReasonEnumeration nilReason) {
+        super(nilReason);
+    }
 
-    public NilReasonEnumeration getNilReason() throws NonNilException{
-        if (!isNilReason()){
-            throw new NonNilException();
+    public NonNegDoubleOrNilReasonType(double value) throws NegativeValueException {
+        super(value);
+        if (value<0.0){
+            throw new NegativeValueException();
         }
-        return nilReason;
     }
 
-    public boolean isNilReason(){
-        return nilReason != null;
-    }
-
-    protected NilReasonType(NilReasonEnumeration nilReason) {
-        this.nilReason = nilReason;
-    }
 
 }

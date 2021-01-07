@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2021 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,11 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.gml;
-
-import org.moarri.snowprofile.caaml.profile.NonNilException;
+package org.moarri.snowprofile.caaml.profile;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public abstract class NilReasonType {
-
-    private final NilReasonEnumeration nilReason;
-
-    public NilReasonEnumeration getNilReason() throws NonNilException{
-        if (!isNilReason()){
-            throw new NonNilException();
-        }
-        return nilReason;
-    }
-
-    public boolean isNilReason(){
-        return nilReason != null;
-    }
-
-    protected NilReasonType(NilReasonEnumeration nilReason) {
-        this.nilReason = nilReason;
-    }
-
+public class ValueOutsideRangeException extends CaamlException {
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2021 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,28 @@
  * limitations under the License.
  *
  */
+package org.moarri.snowprofile.caaml.profile;
 
-package org.moarri.snowprofile.caaml.engine.nodetools;
+import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
- * @author Kuba Radliński <kuba at radlinski.eu >
+ *
+ * @author Kuba Radliński
  */
+public enum DirectionType implements CodeableEnum {
+    TOP_DOWN("top down"),
+    BOTTOM_UP("bottom up");
+    
+    private final String code;
 
-public class CaamlClassException extends Exception {
+    @Override
+    public String getCode() {
+        return code;
+    }
 
-    public CaamlClassException(Throwable cause) {
-        super(cause);
+    DirectionType(String code) {
+        this.code = code;
     }
     
+
 }
