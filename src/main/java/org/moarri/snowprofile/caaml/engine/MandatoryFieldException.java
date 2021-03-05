@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2021 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,20 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.engine.nodetools;
+package org.moarri.snowprofile.caaml.engine;
 
 import org.moarri.snowprofile.caaml.profile.CaamlException;
 
 import java.text.MessageFormat;
 
 /**
- * @author Kuba Radliński <kuba at radlinski.eu >
+ * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public class AttributeMissingException extends CaamlException {
-    private static final String MSG = "Missing atribute: '{0}' for node: '{1}";
-    public AttributeMissingException(String attribute, String nodeName) {
-        super(MessageFormat.format(MSG, attribute, nodeName));
+public class MandatoryFieldException extends CaamlException {
+    private static final String MSG="Field {0} is mandatory";
+
+    public MandatoryFieldException(String fieldName) {
+        super(MessageFormat.format(MSG, fieldName));
     }
 }

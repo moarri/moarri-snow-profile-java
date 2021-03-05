@@ -38,7 +38,7 @@ public class CodeableEnumTranslator {
     public static <E extends CodeableEnum> E fromAttribute(Class<E> enumClass, Element e, String attributeName) throws NullCodeValueException, NonExistingCodeException, AttributeMissingException {
         String s = AttributeProcessor.trimAttribute(e.getAttribute(attributeName));
         if (s == null || s.isEmpty()) {
-            throw new AttributeMissingException(attributeName);
+            throw new AttributeMissingException(attributeName, e.getNodeName());
         }
         return EnumValueProvider.valueOfCode(enumClass, s);
     }
