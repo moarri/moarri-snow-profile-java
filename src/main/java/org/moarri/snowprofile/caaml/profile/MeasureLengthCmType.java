@@ -20,35 +20,40 @@ package org.moarri.snowprofile.caaml.profile;
 import org.moarri.snowprofile.caaml.gml.NilReasonEnumeration;
 
 /**
- * @author Kuba Radliński <kuba at radlinski.eu >
+ * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public class TempType extends TempOrNilReasonType implements FixedUom<UomTempType> {
-    private static final UomTempType FIXED_UOM = UomTempType.DEGC;
-    private final UomTempType uom = FIXED_UOM;
+public class MeasureLengthCmType extends NonNegDoubleOrNilReasonType implements FixedUom<UomLengthType>{
+    private static final UomLengthType FIXED_UOM = UomLengthType.CM;
+    private final UomLengthType uom = FIXED_UOM;
 
-    public UomTempType getUom() {
+    public UomLengthType getUom() {
         return uom;
     }
 
-    public TempType(double value, UomTempType uom) throws ValueOutsideRangeException, UomWrongUnitException{
+
+    public MeasureLengthCmType(Double value, Uom uom) throws NegativeValueException, UomWrongUnitException {
         super(value);
         if (uom != FIXED_UOM){
             throw new UomWrongUnitException();
         }
+
     }
 
-    public TempType(NilReasonEnumeration nilReason, UomTempType uom) throws UomWrongUnitException{
+    public MeasureLengthCmType(NilReasonEnumeration nilReason, Uom uom) throws UomWrongUnitException {
         super(nilReason);
         if (uom != FIXED_UOM){
             throw new UomWrongUnitException();
         }
     }
 
-
+    @Override
+    public boolean isFixedUom() {
+        return true;
+    }
 
     @Override
-    public UomTempType fixedUom() {
-        return FIXED_UOM;
+    public UomLengthType fixedUom() {
+        return uom;
     }
 }

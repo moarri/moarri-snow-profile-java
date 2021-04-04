@@ -24,7 +24,17 @@ import java.util.List;
  * @author Kuba Radliński
  */
 public class SnowProfileResultsOf {
-//    private CaamlSnowProfileMeasurements snowProfileMeasurements = new CaamlSnowProfileMeasurements();
+    private final SnowProfileMeasurementsType snowProfileMeasurements;
+
+    public SnowProfileMeasurementsType getSnowProfileMeasurements() {
+        return snowProfileMeasurements;
+    }
+
+    public SnowProfileResultsOf(SnowProfileMeasurementsType snowProfileMeasurements) {
+        this.snowProfileMeasurements = snowProfileMeasurements;
+    }
+
+    //    private CaamlSnowProfileMeasurements snowProfileMeasurements = new CaamlSnowProfileMeasurements();
 //
 //    public CaamlSnowProfileMeasurements getSnowProfileMeasurements() {
 //        return snowProfileMeasurements;

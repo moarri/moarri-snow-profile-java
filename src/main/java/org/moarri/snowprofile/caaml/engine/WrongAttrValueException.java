@@ -15,11 +15,20 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.profile;
+package org.moarri.snowprofile.caaml.engine;
+
+import org.moarri.snowprofile.caaml.profile.CaamlException;
+
+import java.text.MessageFormat;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public class MetaData {
+public class WrongAttrValueException extends CaamlException {
+    private static final String MSG="Wrong attribute: {0} value <{1}> for node: {2}. Required: <{3}>";
+
+    public WrongAttrValueException(String attrName, String value, String nodeName, String expectedValue) {
+        super(MessageFormat.format(MSG, attrName, value, nodeName, expectedValue));
+    }
 }

@@ -17,17 +17,13 @@
 
 package org.moarri.snowprofile.caaml.engine.nodetools;
 
+import org.moarri.snowprofile.caaml.profile.CaamlException;
+
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public class NonExistingCodeException extends Exception {
-    private String code;
-
-    public String getCode() {
-        return code;
-    }
-
+public class NonExistingCodeException extends CaamlException {
     public NonExistingCodeException(Class enumClass, String code) {
         super("Non exisiting code '"+code+"' for class:"+enumClass.getCanonicalName());
     }

@@ -17,25 +17,13 @@
 
 package org.moarri.snowprofile.caaml.engine;
 
-import org.w3c.dom.Element;
+import org.moarri.snowprofile.caaml.profile.CaamlException;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import java.util.Optional;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public abstract class AbstractXMLProcessor {
-    protected static Optional<Node> findChildNode(Element e, String nodeName){
-        NodeList children = e.getChildNodes();
-        for (int i = 0; i < children.getLength(); i++) {
-            Node node = children.item(i);
-            if (node instanceof Element && node.getNodeName().equals(nodeName)){
-                return Optional.of(node);
-            }
-        }
-        return Optional.empty();
-    }
+public interface CustomMetaDataParser<E> {
+    E parseNode(Node node) throws CaamlException;
 }

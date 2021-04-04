@@ -22,7 +22,7 @@ import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
  *
  * @author Kuba Radliński
  */
-public enum UomLengthType implements CodeableEnum, Uom {
+public enum UomLengthType implements CodeableEnum<UomLengthType>, Uom {
 
     CM("cm"),
     MM("mm"),

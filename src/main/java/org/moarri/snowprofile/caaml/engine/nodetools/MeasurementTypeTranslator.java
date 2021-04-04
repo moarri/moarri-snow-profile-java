@@ -35,7 +35,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public abstract class MeasurementTypeTranslator {
 
-    private static <E extends DoubleOrNilReasonType> E fromDomElement(Class<E> measClass, Element e) throws NullCodeValueException, NonExistingCodeException, NegativeValueException, ValueOutsideRangeException, CaamlClassException {
+    public static <E extends DoubleOrNilReasonType> E fromDomElement(Class<E> measClass, Element e) throws NullCodeValueException, NonExistingCodeException, NegativeValueException, ValueOutsideRangeException, CaamlClassException {
         try {
             NilReasonEnumeration nilReasonEnumeration = CodeableEnumTranslator.fromDomElement(NilReasonEnumeration.class, e);
             return measClass.getConstructor(NilReasonEnumeration.class).newInstance(nilReasonEnumeration);
@@ -51,7 +51,7 @@ public abstract class MeasurementTypeTranslator {
         }
     }
 
-    private static <T extends CodeableEnum & Uom, E extends DoubleOrNilReasonType & FixedUom<T>> E fromDomElement(Class<E> measClass, Class<T> uomClass, Element e) throws NullCodeValueException, NonExistingCodeException, NegativeValueException, ValueOutsideRangeException, CaamlClassException, AttributeMissingException, UomWrongUnitException {
+    public static <T extends CodeableEnum & Uom, E extends DoubleOrNilReasonType & FixedUom<T>> E fromDomElement(Class<E> measClass, Class<T> uomClass, Element e) throws NullCodeValueException, NonExistingCodeException, NegativeValueException, ValueOutsideRangeException, CaamlClassException, AttributeMissingException, UomWrongUnitException {
         T uom = CodeableEnumTranslator.fromUomAttribute(uomClass, e);
         try {
             NilReasonEnumeration nilReasonEnumeration = CodeableEnumTranslator.fromDomElement(NilReasonEnumeration.class, e);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Moarri Project
+ * Copyright (c) 2021 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,19 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.engine.nodetools;
+package org.moarri.snowprofile.caaml.engine;
 
 import org.moarri.snowprofile.caaml.profile.CaamlException;
 
+import java.text.MessageFormat;
+
 /**
- * @author Kuba Radliński <kuba at radlinski.eu >
+ * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public class NullCodeValueException extends CaamlException {
-    public NullCodeValueException(Class enumClass) {
-        super("Null code for class:"+enumClass.getCanonicalName());
+public class XmlProcessingException extends CaamlException {
+    private static final String MSG="Error during xml processing: {1}";
+    public XmlProcessingException(Throwable cause) {
+        super(MessageFormat.format(MSG, cause.getLocalizedMessage()), cause);
     }
 }

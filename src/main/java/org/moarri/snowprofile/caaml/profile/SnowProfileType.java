@@ -16,18 +16,14 @@
  */
 package org.moarri.snowprofile.caaml.profile;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 /**
  *
  * @author Kuba Radliński
  */
-public class SnowProfile {
+public class SnowProfileType {
 
     private final String id;
-    private final MetaData metaData;
+    private final MetaDataBaseType metaData;
     private final TimeRef timeRef;
     private final SrcRef srcRef;
     private final LocRef locRef;
@@ -39,7 +35,7 @@ public class SnowProfile {
         return id;
     }
 
-    public MetaData getMetaData() {
+    public MetaDataBaseType getMetaData() {
         return metaData;
     }
 
@@ -67,7 +63,7 @@ public class SnowProfile {
         return applicationVersion;
     }
 
-    public SnowProfile(Builder builder){
+    public SnowProfileType(Builder builder){
         this.id = builder.id;
         this.metaData = builder.metaData;
         this.timeRef = builder.timeRef;
@@ -84,16 +80,16 @@ public class SnowProfile {
 
 
     public static class Builder{
-        private String id;
-        private MetaData metaData = null;
-        private TimeRef timeRef;
-        private SrcRef srcRef;
-        private LocRef locRef;
-        private SnowProfileResultsOf snowProfileResultsOf;
+        private final String id;
+        private MetaDataBaseType metaData = null;
+        private final TimeRef timeRef;
+        private final SrcRef srcRef;
+        private final LocRef locRef;
+        private final SnowProfileResultsOf snowProfileResultsOf;
         private String application = null;
         private String applicationVersion = null;
 
-        public Builder withMetaData(MetaData metaData) {
+        public Builder withMetaData(MetaDataBaseType metaData) {
             this.metaData = metaData;
             return this;
         }
@@ -112,8 +108,8 @@ public class SnowProfile {
             this.snowProfileResultsOf = snowProfileResultsOf;
         }
 
-        public SnowProfile build(){
-            return new SnowProfile(this);
+        public SnowProfileType build(){
+            return new SnowProfileType(this);
         }
     }
 

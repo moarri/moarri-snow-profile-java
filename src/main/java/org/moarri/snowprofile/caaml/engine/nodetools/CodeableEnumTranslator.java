@@ -21,6 +21,7 @@ import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 import org.moarri.snowprofile.caaml.baseenum.EnumValueProvider;
 import org.moarri.snowprofile.caaml.profile.Uom;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >

@@ -19,11 +19,12 @@ package org.moarri.snowprofile.caaml.engine;
 
 import org.junit.Test;
 import org.moarri.snowprofile.caaml.profile.CaamlException;
-import org.moarri.snowprofile.caaml.profile.SnowProfile;
+import org.moarri.snowprofile.caaml.profile.SnowProfileType;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -31,7 +32,7 @@ import static org.junit.Assert.*;
  * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public class CAAMLProfileReaderTest {
+public class CaamlProfileReaderTest {
     private static final String TEST_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950.xml";
     private static final String TEST_WRONG_ELEMENT_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950-wrong-element.xml";
     private static final String TEST_WRONG_VERSION_CAAML_FILE="/resources/test-profile-data/SnowProfile_IACS_SLF22950-wrong-version.xml";
@@ -40,9 +41,9 @@ public class CAAMLProfileReaderTest {
     public void readCaamlStringProperProfileFile() {
         try (InputStream is = this.getClass().getResourceAsStream(TEST_CAAML_FILE)) {
             String caamlText = TextFileReader.readFromInputStream(is);
-            SnowProfile result = CAAMLProfileReader.readCaamlString(caamlText);
-            assertNotNull(result);
-
+            CaamlProfileReader reader = new CaamlProfileReader();
+            Optional<SnowProfileType> result = reader.readCaamlString(caamlText);
+            assertTrue(result.isPresent());
         } catch (IOException | CaamlException e) {
             fail(e.getMessage());
         }
@@ -53,7 +54,8 @@ public class CAAMLProfileReaderTest {
         for(String testFilePath: List.of(TEST_WRONG_ELEMENT_CAAML_FILE, TEST_WRONG_VERSION_CAAML_FILE)){
             try (InputStream is = this.getClass().getResourceAsStream(testFilePath)) {
                 String caamlText = TextFileReader.readFromInputStream(is);
-                SnowProfile result = CAAMLProfileReader.readCaamlString(caamlText);
+                CaamlProfileReader reader = new CaamlProfileReader();
+                Optional<SnowProfileType> result = reader.readCaamlString(caamlText);
                 assertNotNull(result);
             } catch (IOException e) {
                 fail(e.getMessage());

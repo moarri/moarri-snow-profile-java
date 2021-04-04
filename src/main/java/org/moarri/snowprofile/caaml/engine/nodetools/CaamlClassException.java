@@ -17,11 +17,13 @@
 
 package org.moarri.snowprofile.caaml.engine.nodetools;
 
+import org.moarri.snowprofile.caaml.profile.CaamlException;
+
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public class CaamlClassException extends Exception {
+public class CaamlClassException extends CaamlException {
 
     public CaamlClassException(Throwable cause) {
         super(cause);
