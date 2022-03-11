@@ -24,7 +24,7 @@ import org.moarri.snowprofile.caaml.profile.CaamlException;
  */
 
 public class NullCodeValueException extends CaamlException {
-    public NullCodeValueException(Class enumClass) {
+    public NullCodeValueException(final Class enumClass) {
         super("Null code for class:"+enumClass.getCanonicalName());
     }
 }

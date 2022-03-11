@@ -16,56 +16,39 @@
  */
 package org.moarri.snowprofile.caaml.profile;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
-import java.util.EnumSet;
 /**
  *
  * @author Kuba Radliński
  */
+@Getter
+@RequiredArgsConstructor
 public enum HardnessType implements CodeableEnum {
 
-    F_MINUS("F-",10),
-    F("F",20),
-    F_PLUS("F+",35),
-    FF4("F-4F",50),
-    F4_MINUS("4F-",75),
-    F4("4F",100),
-    F4_PLUS("4F+",137),
-    F4F1("4F-1F",175),
-    F1_MINUS("1F-",210),
-    F1("1F",250),
-    F1_PLUS("1F+",235),
-    F1P("1F-P",390),
-    P_MINUS("P-",445),
-    P("P",500),
-    P_PLUS("P+",605),
-    PK("P-K",715),
-    K_MINUS("K-",900),
-    K("K",1000),
-    K_PLUS("K+",1100),
-    KI("K-I",1150),
-    I("I",1200);
+    F_MINUS("F-"),
+    F("F"),
+    F_PLUS("F+"),
+    FF4("F-4F"),
+    F4_MINUS("4F-"),
+    F4("4F"),
+    F4_PLUS("4F+"),
+    F4F1("4F-1F"),
+    F1_MINUS("1F-"),
+    F1("1F"),
+    F1_PLUS("1F+"),
+    F1P("1F-P"),
+    P_MINUS("P-"),
+    P("P"),
+    P_PLUS("P+"),
+    PK("P-K"),
+    K_MINUS("K-"),
+    K("K"),
+    K_PLUS("K+"),
+    KI("K-I"),
+    I("I");
 
-    public final static EnumSet<HardnessType> MAIN_ELEMENTS = EnumSet.of(F, F4, F1, P, K, I);
-    public final static EnumSet<HardnessType> MAIN_MIDDLE_ELEMENTS = EnumSet.of(F, FF4, F4, F4F1, F1, F1P, P, PK, K, KI, I);
     private final String code;
-    private final int hardness;
-    
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    public int getHardness() {
-        return hardness;
-    }
-
-    
-    HardnessType(String code, int hardness) {
-        this.code = code;
-        this.hardness = hardness;
-    }
-
-
-}
+ }

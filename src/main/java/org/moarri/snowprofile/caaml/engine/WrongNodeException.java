@@ -28,7 +28,7 @@ import java.text.MessageFormat;
 public class WrongNodeException extends CaamlException {
     private static final String MSG="Wrong node. Expected: {0}, actual: {1}";
 
-    public WrongNodeException(String expected, String actual) {
+    public WrongNodeException(final String expected, final String actual) {
         super(MessageFormat.format(MSG, expected, actual));
     }
 }

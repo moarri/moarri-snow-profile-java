@@ -17,26 +17,20 @@
 
 package org.moarri.snowprofile.caaml.profile;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public enum ComprTestScoreCatType implements CodeableEnum {
+@Getter
+@RequiredArgsConstructor
+public enum ComprTestScoreCatType implements CodeableEnum<ComprTestScoreCatType> {
     CTV("CTV"),
     CTE("CTE"),
     CTM("CTM"),
     CTH("CTH");
-    private String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    ComprTestScoreCatType(String code) {
-        this.code = code;
-    }
-
+    private final String code;
 }

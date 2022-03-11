@@ -25,7 +25,7 @@ import org.moarri.snowprofile.caaml.profile.CaamlException;
 
 public class CaamlClassException extends CaamlException {
 
-    public CaamlClassException(Throwable cause) {
+    public CaamlClassException(final Throwable cause) {
         super(cause);
     }
     

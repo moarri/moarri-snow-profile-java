@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
  */
 
 public class TextFileReader {
-    public static String readFromInputStream(InputStream inputStream)
+    public static String readFromInputStream(final InputStream inputStream)
             throws IOException {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader br
@@ -40,7 +40,7 @@ public class TextFileReader {
         return resultStringBuilder.toString();
     }
 
-    public static String readFromResource(Class clazz, String filePath) throws IOException {
+    public static String readFromResource(final Class clazz, final String filePath) throws IOException {
         InputStream inputStream = clazz.getResourceAsStream(filePath);
         return readFromInputStream(inputStream);
     }

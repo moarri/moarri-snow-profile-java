@@ -38,7 +38,7 @@ public abstract class NilReasonType {
         return nilReason != null;
     }
 
-    protected NilReasonType(NilReasonEnumeration nilReason) {
+    protected NilReasonType(final NilReasonEnumeration nilReason) {
         this.nilReason = nilReason;
     }
 

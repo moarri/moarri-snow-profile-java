@@ -20,7 +20,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -35,6 +34,14 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+import static javax.xml.parsers.DocumentBuilderFactory.newInstance;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.moarri.snowprofile.caaml.engine.CaamlValidator.validateCaaml;
+import static org.moarri.snowprofile.caaml.engine.NodeUtils.*;
+import static org.moarri.snowprofile.caaml.engine.ValidationResultType.VALIDATION_OK;
+
 /**
  *
  * @author Kuba Radliński
@@ -42,29 +49,27 @@ import org.xml.sax.SAXException;
 public class CaamlProfileReader {
     CustomMetaDataParser snowProfileMetaDataParser = null;
 
-    public Optional<SnowProfileType> readCaamlString(String s) throws CaamlException {
-        ValidationResult validationResult = CaamlValidator.validateCaaml(s);
-        if(validationResult.getResultType() != ValidationResultType.VALIDATION_OK){
+    public Optional<SnowProfileType> readCaamlString(final String s) throws CaamlException {
+        final ValidationResult validationResult = validateCaaml(s);
+        if(validationResult.getResultType() != VALIDATION_OK){
             throw new ValidationException(validationResult);
         }
-
         try(InputStream is = new ByteArrayInputStream(s.getBytes())){
-           return Optional.of(readCaamlStream(is));
+           return of(readCaamlStream(is));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Optional.empty();
+        return empty();
     }
 
 
-    private SnowProfileType readCaamlStream(InputStream is) throws CaamlException  {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    private SnowProfileType readCaamlStream(final InputStream is) throws CaamlException  {
+        final DocumentBuilderFactory factory = newInstance();
         factory.setValidating(true);
         factory.setIgnoringElementContentWhitespace(true);
         factory.setIgnoringComments(true);
         try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(is);
+            final Document doc = factory.newDocumentBuilder().parse(is);
             removeWhitespace(doc.getDocumentElement());
             return parseSnowProfile(doc.getDocumentElement());
         } catch (SAXException | IOException | ParserConfigurationException ex) {
@@ -73,71 +78,65 @@ public class CaamlProfileReader {
     }
 
 
-    private SnowProfileType parseSnowProfile(Element e) throws CaamlException {
+    private SnowProfileType parseSnowProfile(final Element e) throws CaamlException {
         if(!CaamlMeta.SnowProfileType.MAIN_NODE.equals(e.getNodeName())){
             throw new WrongNodeException(CaamlMeta.SnowProfileType.MAIN_NODE, e.getNodeName());
         }
         if(!e.hasAttribute(CaamlMeta.SnowProfileType.ATTR_GML_ID)){
             throw new AttributeMissingException(CaamlMeta.SnowProfileType.ATTR_GML_ID, e.getNodeName());
         }
-        String id = e.getAttribute(CaamlMeta.SnowProfileType.ATTR_GML_ID);
-        TimeRef timeRef = parseTimeRef(e);
-        SnowProfileResultsOf snowProfileResultsOf = parseSnowProfileResultsOf(e);
-        SrcRef srcRef = parseSrcRef(e);
-        LocRef locRef = parseLocRef(e);
-        MetaDataBaseType metaData = findChildNode(e, CaamlMeta.SnowProfileType.CHILD_META_DATA)
-                .flatMap(n -> Optional.of(new MetaDataBaseType()))
+        final String id = e.getAttribute(CaamlMeta.SnowProfileType.ATTR_GML_ID);
+        final TimeRef timeRef = parseTimeRef(e);
+        final SnowProfileResultsOf snowProfileResultsOf = parseSnowProfileResultsOf(e);
+        final SrcRef srcRef = parseSrcRef(e);
+        final LocRef locRef = parseLocRef(e);
+        final MetaDataBaseType metaData = findChildNode(e, CaamlMeta.SnowProfileType.CHILD_META_DATA)
+                .flatMap(n -> of(new MetaDataBaseType()))
                 .orElse(null);
-        String application = parseTextNode(e, CaamlMeta.SnowProfileType.CHILD_APPLICATION);
-        String applicationVersion = parseTextNode(e, CaamlMeta.SnowProfileType.CHILD_APPLICATION_VERSION);
+        final String application = parseTextNode(e, CaamlMeta.SnowProfileType.CHILD_APPLICATION).orElse(EMPTY);
+        final String applicationVersion = parseTextNode(e, CaamlMeta.SnowProfileType.CHILD_APPLICATION_VERSION).orElse(EMPTY);
         return SnowProfileType.builder(id, timeRef, srcRef, locRef, snowProfileResultsOf)
                 .withMetaData(metaData)
                 .withApplicationInfo(application,applicationVersion)
                 .build();
     }
 
-
-    private SnowProfileResultsOf parseSnowProfileResultsOf(Node parentNode) throws CaamlException {
-        Node node = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_SNOW_PROFILE_RESULTS_OF);
+    private SnowProfileResultsOf parseSnowProfileResultsOf(final Node parentNode) throws CaamlException {
+        final Node node = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_SNOW_PROFILE_RESULTS_OF);
         if(!CaamlMeta.SnowProfileResultsOf.MAIN_NODE.equals(node.getNodeName())){
             throw new WrongNodeException(CaamlMeta.SnowProfileResultsOf.MAIN_NODE, node.getNodeName());
         }
-        SnowProfileMeasurementsType snowProfileMeasurements = parseSnowProfileMeasurements(node);
-        return new SnowProfileResultsOf(snowProfileMeasurements);
+        return new SnowProfileResultsOf(parseSnowProfileMeasurements(node));
     }
 
-    private TimeRef parseTimeRef(Node parentNode) throws CaamlException {
+    private TimeRef parseTimeRef(final Node parentNode) throws CaamlException {
         Node timeRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_TIME_REF);
         return new TimeRef();
     }
 
-    private SnowProfileMeasurementsType parseSnowProfileMeasurements(Node parentNode) throws CaamlException {
-        Node node = findMandatoryNode(parentNode, CaamlMeta.SnowProfileResultsOf.CHILD_SNOW_PROFILE_MEASUREMENTS);
-        DirectionType dir = CodeableEnumTranslator.fromAttribute(DirectionType.class, (Element) node, CaamlMeta.SnowProfileMeasurementsType.ATTR_DIR);
+    private SnowProfileMeasurementsType parseSnowProfileMeasurements(final Node parentNode) throws CaamlException {
+        final Node node = findMandatoryNode(parentNode, CaamlMeta.SnowProfileResultsOf.CHILD_SNOW_PROFILE_MEASUREMENTS);
+        final DirectionType dir = CodeableEnumTranslator.fromAttribute(DirectionType.class, (Element) node, CaamlMeta.SnowProfileMeasurementsType.ATTR_DIR);
         if(dir != DirectionType.TOP_DOWN){
             throw new WrongAttrValueException(CaamlMeta.SnowProfileMeasurementsType.ATTR_DIR, dir.getCode(), node.getNodeName(), DirectionType.TOP_DOWN.getCode());
         }
-        MeasureLengthCmType profileDepth =parseProfileDepth(node);
         return SnowProfileMeasurementsType.builder(dir)
-                .withProfileDepth(profileDepth)
+                .withProfileDepth(parseProfileDepth(node))
                 .build();
     }
 
-    private MeasureLengthCmType parseProfileDepth(Node parentNode) throws CaamlException {
-        Optional<Node> node = findChildNode(parentNode, CaamlMeta.SnowProfileMeasurementsType.CHILD_PROFILE_DEPTH);
-        if(node.isEmpty()) {
-            return null;
-        }
-        return MeasurementTypeTranslator.fromDomElement(MeasureLengthCmType.class, UomLengthType.class, (Element) node.get());
+    private MeasureLengthCmType parseProfileDepth(final Node parentNode) throws CaamlException {
+        final Optional<Node> node = findChildNode(parentNode, CaamlMeta.SnowProfileMeasurementsType.CHILD_PROFILE_DEPTH);
+        return node.isEmpty() ? null : MeasurementTypeTranslator.fromDomElement(MeasureLengthCmType.class, UomLengthType.class, (Element) node.get());
     }
 
-    private SrcRef parseSrcRef(Node parentNode) throws CaamlException {
-        Node srcRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_SRC_REF);
+    private SrcRef parseSrcRef(final Node parentNode) throws CaamlException {
+        final Node srcRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_SRC_REF);
         return new SrcRef();
     }
 
-    private LocRef parseLocRef(Node parentNode) throws CaamlException {
-        Node locRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_LOC_REF);
+    private LocRef parseLocRef(final Node parentNode) throws CaamlException {
+        final Node locRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_LOC_REF);
         return new LocRef();
     }
 
@@ -146,33 +145,6 @@ public class CaamlProfileReader {
 
 // Utility methods
 
-    private Optional<Node> findChildNode(Node parentNode, String nodeName){
-        NodeList children = parentNode.getChildNodes();
-        for (int i = 0; i < children.getLength(); i++) {
-            Node node = children.item(i);
-            if (node instanceof Element && node.getNodeName().equals(nodeName)){
-                return Optional.of(node);
-            }
-        }
-        return Optional.empty();
-    }
-
-    private Node findMandatoryNode(Node node, String nodeName) throws MandatoryFieldException{
-        return findChildNode(node, nodeName)
-                .orElseThrow(() -> new MandatoryFieldException(CaamlMeta.SnowProfileType.CHILD_SNOW_PROFILE_RESULTS_OF));
-    }
-
-
-
-    private String parseTextNode(Node parentNode, String nodeName){
-        return findChildNode(parentNode, nodeName)
-                .flatMap(this::extractText)
-                .orElse(null);
-    }
-
-    private Optional<String> extractText(Node node){
-        return Optional.of(node.getTextContent().trim());
-    }
 
 
 //    public static String trimAttribute(String attr) {

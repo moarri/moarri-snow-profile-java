@@ -28,7 +28,7 @@ import java.text.MessageFormat;
 public class MandatoryFieldException extends CaamlException {
     private static final String MSG="Field {0} is mandatory";
 
-    public MandatoryFieldException(String fieldName) {
+    public MandatoryFieldException(final String fieldName) {
         super(MessageFormat.format(MSG, fieldName));
     }
 }

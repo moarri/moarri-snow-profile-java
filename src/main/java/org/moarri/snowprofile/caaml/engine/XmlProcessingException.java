@@ -27,7 +27,7 @@ import java.text.MessageFormat;
 
 public class XmlProcessingException extends CaamlException {
     private static final String MSG="Error during xml processing: {1}";
-    public XmlProcessingException(Throwable cause) {
+    public XmlProcessingException(final Throwable cause) {
         super(MessageFormat.format(MSG, cause.getLocalizedMessage()), cause);
     }
 }

@@ -17,32 +17,19 @@
 
 package org.moarri.snowprofile.caaml.profile;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 /**
  * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
+@Getter
+@RequiredArgsConstructor
 public class ChildrenDefinition {
     private final Class clazz;
     private final String nodeName;
     private final boolean required;
-
-    public Class getClazz() {
-        return clazz;
-    }
-
-    public String getNodeName() {
-        return nodeName;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public ChildrenDefinition(Class clazz, String nodeName, boolean required) {
-        this.clazz = clazz;
-        this.nodeName = nodeName;
-        this.required = required;
-    }
 
     public ChildrenDefinition(Class clazz, String nodeName) {
         this(clazz, nodeName, false);

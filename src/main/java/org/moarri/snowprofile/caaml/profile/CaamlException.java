@@ -25,15 +25,15 @@ public abstract class CaamlException extends Exception {
     public CaamlException() {
     }
 
-    public CaamlException(String message) {
+    public CaamlException(final String message) {
         super(message);
     }
 
-    public CaamlException(String message, Throwable cause) {
+    public CaamlException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
-    public CaamlException(Throwable cause) {
+    public CaamlException(final Throwable cause) {
         super(cause);
     }
 }

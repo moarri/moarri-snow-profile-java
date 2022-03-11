@@ -17,30 +17,21 @@
 
 package org.moarri.snowprofile.caaml.gml;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public enum NilReasonEnumeration implements CodeableEnum {
+@Getter
+@RequiredArgsConstructor
+public enum NilReasonEnumeration implements CodeableEnum<NilReasonEnumeration> {
     INAPPLICABLE("inapplicable"),
     MISSING("missing"),
     TEMPLATE("template"),
     UNKNOWN("unknown"),
     WITHHELD("withheld");
-
-
     private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    NilReasonEnumeration(String code) {
-        this.code = code;
-    }
-
-
 }

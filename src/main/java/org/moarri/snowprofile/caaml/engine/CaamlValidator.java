@@ -51,42 +51,40 @@ class CaamlValidator {
     private static final String XSD_FILE_NAME = "CAAMLv6_SnowProfileIACS.xsd";
 
 
-    static ValidationResult validateCaaml(String caamlText){
-        ValidationResult result ;
+    static ValidationResult validateCaaml(final String caamlText){
         Optional<CaamlVersion> optionalCaamlVersion = Optional.empty();
         try {
-            DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
+            final DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
                     .newDocumentBuilder();
-            Document doc = dBuilder.parse(new InputSource( new StringReader( caamlText ) ));
+            final Document doc = dBuilder.parse(new InputSource( new StringReader( caamlText ) ));
             doc.getDocumentElement().normalize();
-            Element rootElement = doc.getDocumentElement();
-            String caamlAttributeString = rootElement.getAttribute("xmlns:caaml");
+            final Element rootElement = doc.getDocumentElement();
+            final String caamlAttributeString = rootElement.getAttribute("xmlns:caaml");
             if (caamlAttributeString == null || caamlAttributeString.isEmpty()){
                 return new ValidationResult(ValidationResultType.XML_VALIDATION_ERROR, null, "No xmlns:caaml attribute");
             }
-            String [] parts = caamlAttributeString.split("/");
+            final String [] parts = caamlAttributeString.split("/");
             if (parts.length <1) {
                 return new ValidationResult(ValidationResultType.XML_VALIDATION_ERROR, null, "Empty xmlns:caaml attribute");
             }
-            String versionString = parts[parts.length-1];
+            final String versionString = parts[parts.length-1];
             optionalCaamlVersion = Arrays.stream(CaamlVersion.values()).filter(cv->(cv.getVersionString().equals(versionString))).findFirst();
             if (optionalCaamlVersion.isEmpty()){
                 return new ValidationResult(ValidationResultType.CAAML_UNSUPORTED_VERSION, null, "Unknown version string: "+versionString);
             }
-            String xsdPath = XSD_PATH+"/"+optionalCaamlVersion.get().getVersionString().replace('.','_')+"/"+XSD_FILE_NAME;
-            Source xsdSource = new StreamSource(ValidationResult.class.getResourceAsStream(xsdPath));
+            final String xsdPath = XSD_PATH+"/"+optionalCaamlVersion.get().getVersionString().replace('.','_')+"/"+XSD_FILE_NAME;
+            final Source xsdSource = new StreamSource(ValidationResult.class.getResourceAsStream(xsdPath));
 
-            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            final SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             schemaFactory.setResourceResolver(new ResourceResolver());
-            Schema schema = schemaFactory.newSchema(xsdSource);
-            Validator validator = schema.newValidator();
+            final Schema schema = schemaFactory.newSchema(xsdSource);
+            final Validator validator = schema.newValidator();
             validator.validate(new StreamSource( new StringReader( caamlText ) ));
-            result = new ValidationResult(ValidationResultType.VALIDATION_OK, optionalCaamlVersion.get(), "");
+            return new ValidationResult(ValidationResultType.VALIDATION_OK, optionalCaamlVersion.get(), "");
         } catch (ParserConfigurationException | IOException ex) {
-            result = new ValidationResult(ValidationResultType.XML_PARSE_ERROR, null, ex.getLocalizedMessage());
+            return new ValidationResult(ValidationResultType.XML_PARSE_ERROR, null, ex.getLocalizedMessage());
         } catch (SAXException e1) {
-            result = new ValidationResult(ValidationResultType.XML_VALIDATION_ERROR, optionalCaamlVersion.orElseGet(null), e1.getMessage());
+            return new ValidationResult(ValidationResultType.XML_VALIDATION_ERROR, optionalCaamlVersion.orElse(null), e1.getMessage());
         }
-            return result;
     }
 }

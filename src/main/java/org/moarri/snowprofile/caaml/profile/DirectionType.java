@@ -16,26 +16,19 @@
  */
 package org.moarri.snowprofile.caaml.profile;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
  *
  * @author Kuba Radliński
  */
-public enum DirectionType implements CodeableEnum {
+@Getter
+@RequiredArgsConstructor
+public enum DirectionType implements CodeableEnum<DirectionType> {
     TOP_DOWN("top down"),
     BOTTOM_UP("bottom up");
     
     private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    DirectionType(String code) {
-        this.code = code;
-    }
-    
-
 }

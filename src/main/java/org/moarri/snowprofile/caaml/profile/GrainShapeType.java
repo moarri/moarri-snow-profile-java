@@ -78,7 +78,7 @@ public enum GrainShapeType implements CodeableEnum<GrainShapeType> {
     
     public final static Set<GrainShapeType> FIRST_LEVEL = EnumSet.of(PP,MM,DF,RG,FC,DH,SH,MF,IF);
     private final String code;
-    private GrainShapeType parent;
+    private final GrainShapeType parent;
     
     @Override
     public String getCode() {
@@ -95,6 +95,7 @@ public enum GrainShapeType implements CodeableEnum<GrainShapeType> {
 
     GrainShapeType(String code) {
         this.code = code;
+        this.parent = null;
     }
 
     GrainShapeType(String code, GrainShapeType parent) {
@@ -105,7 +106,4 @@ public enum GrainShapeType implements CodeableEnum<GrainShapeType> {
     public static Set<String> validCodes() {
         return Arrays.stream(values()).map(GrainShapeType::getCode).collect(Collectors.toSet());
     }
-
-
-
 }

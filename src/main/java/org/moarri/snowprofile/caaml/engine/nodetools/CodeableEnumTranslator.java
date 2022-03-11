@@ -21,7 +21,9 @@ import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 import org.moarri.snowprofile.caaml.baseenum.EnumValueProvider;
 import org.moarri.snowprofile.caaml.profile.Uom;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
@@ -32,13 +34,13 @@ public class CodeableEnumTranslator {
 
 
     public static <E extends CodeableEnum> E fromDomElement(Class<E> enumClass, Element e) throws NullCodeValueException, NonExistingCodeException {
-        String s = e.getTextContent().trim();
+        final String s = isNotEmpty(e.getTextContent()) ? e.getTextContent().trim() : null;
         return EnumValueProvider.valueOfCode(enumClass, s);
     }
 
     public static <E extends CodeableEnum> E fromAttribute(Class<E> enumClass, Element e, String attributeName) throws NullCodeValueException, NonExistingCodeException, AttributeMissingException {
-        String s = AttributeProcessor.trimAttribute(e.getAttribute(attributeName));
-        if (s == null || s.isEmpty()) {
+        final String s = AttributeProcessor.trimAttribute(e.getAttribute(attributeName));
+        if (isEmpty(s)) {
             throw new AttributeMissingException(attributeName, e.getNodeName());
         }
         return EnumValueProvider.valueOfCode(enumClass, s);
@@ -47,6 +49,4 @@ public class CodeableEnumTranslator {
     public static <E extends CodeableEnum & Uom> E fromUomAttribute(Class<E> enumClass, Element e) throws NullCodeValueException, NonExistingCodeException, AttributeMissingException {
         return fromAttribute(enumClass, e, ATTR_UOM);
     }
-
-
 }

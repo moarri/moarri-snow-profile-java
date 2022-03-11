@@ -24,7 +24,7 @@ import org.moarri.snowprofile.caaml.profile.CaamlException;
  */
 
 public class NonExistingCodeException extends CaamlException {
-    public NonExistingCodeException(Class enumClass, String code) {
+    public NonExistingCodeException(final Class enumClass, final String code) {
         super("Non exisiting code '"+code+"' for class:"+enumClass.getCanonicalName());
     }
 }

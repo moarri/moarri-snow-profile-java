@@ -28,7 +28,7 @@ import java.text.MessageFormat;
 public class WrongAttrValueException extends CaamlException {
     private static final String MSG="Wrong attribute: {0} value <{1}> for node: {2}. Required: <{3}>";
 
-    public WrongAttrValueException(String attrName, String value, String nodeName, String expectedValue) {
+    public WrongAttrValueException(final String attrName, final String value, final String nodeName, final String expectedValue) {
         super(MessageFormat.format(MSG, attrName, value, nodeName, expectedValue));
     }
 }

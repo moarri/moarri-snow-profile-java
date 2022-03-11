@@ -35,12 +35,12 @@ import java.lang.reflect.InvocationTargetException;
 
 public abstract class MeasurementTypeTranslator {
 
-    public static <E extends DoubleOrNilReasonType> E fromDomElement(Class<E> measClass, Element e) throws NullCodeValueException, NonExistingCodeException, NegativeValueException, ValueOutsideRangeException, CaamlClassException {
+    public static <E extends DoubleOrNilReasonType> E fromDomElement(final Class<E> measClass, final Element e) throws NullCodeValueException, NonExistingCodeException, NegativeValueException, ValueOutsideRangeException, CaamlClassException {
         try {
-            NilReasonEnumeration nilReasonEnumeration = CodeableEnumTranslator.fromDomElement(NilReasonEnumeration.class, e);
+            final NilReasonEnumeration nilReasonEnumeration = CodeableEnumTranslator.fromDomElement(NilReasonEnumeration.class, e);
             return measClass.getConstructor(NilReasonEnumeration.class).newInstance(nilReasonEnumeration);
         } catch (NonExistingCodeException ex) {
-            double initialValue = Double.valueOf(e.getTextContent().trim());
+            final double initialValue = Double.parseDouble(e.getTextContent().trim());
             try {
                 return measClass.getConstructor(Double.class).newInstance(initialValue);
             } catch (InstantiationException  | InvocationTargetException | NoSuchMethodException | IllegalAccessException ex1) {
@@ -51,13 +51,13 @@ public abstract class MeasurementTypeTranslator {
         }
     }
 
-    public static <T extends CodeableEnum & Uom, E extends DoubleOrNilReasonType & FixedUom<T>> E fromDomElement(Class<E> measClass, Class<T> uomClass, Element e) throws NullCodeValueException, NonExistingCodeException, NegativeValueException, ValueOutsideRangeException, CaamlClassException, AttributeMissingException, UomWrongUnitException {
-        T uom = CodeableEnumTranslator.fromUomAttribute(uomClass, e);
+    public static <T extends CodeableEnum & Uom, E extends DoubleOrNilReasonType & FixedUom<T>> E fromDomElement(final Class<E> measClass, final Class<T> uomClass, Element e) throws NullCodeValueException, NonExistingCodeException, NegativeValueException, ValueOutsideRangeException, CaamlClassException, AttributeMissingException, UomWrongUnitException {
+        final T uom = CodeableEnumTranslator.fromUomAttribute(uomClass, e);
         try {
-            NilReasonEnumeration nilReasonEnumeration = CodeableEnumTranslator.fromDomElement(NilReasonEnumeration.class, e);
+            final NilReasonEnumeration nilReasonEnumeration = CodeableEnumTranslator.fromDomElement(NilReasonEnumeration.class, e);
             return measClass.getConstructor(NilReasonEnumeration.class, Uom.class).newInstance(nilReasonEnumeration, uom);
         } catch (NonExistingCodeException ex) {
-            double initialValue = Double.valueOf(e.getTextContent().trim());
+            final double initialValue = Double.parseDouble(e.getTextContent().trim());
             try {
                 return measClass.getConstructor(Double.class, Uom.class).newInstance(initialValue, uom);
             } catch (InstantiationException  | InvocationTargetException | NoSuchMethodException | IllegalAccessException ex1) {

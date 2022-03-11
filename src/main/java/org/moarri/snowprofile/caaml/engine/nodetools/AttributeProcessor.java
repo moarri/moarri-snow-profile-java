@@ -17,16 +17,15 @@
 
 package org.moarri.snowprofile.caaml.engine.nodetools;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
 public class AttributeProcessor {
-    public static String trimAttribute(String attr) {
-        if (attr == null) {
-            return null;
-        }
-        return attr.trim();
+    public static String trimAttribute(final String attr) {
+        return isNotEmpty(attr) ? attr.trim() : EMPTY;
     }
-
 }

@@ -27,7 +27,7 @@ import java.text.MessageFormat;
 
 public class AttributeMissingException extends CaamlException {
     private static final String MSG = "Missing atribute: '{0}' for node: '{1}";
-    public AttributeMissingException(String attribute, String nodeName) {
+    public AttributeMissingException(final String attribute, final String nodeName) {
         super(MessageFormat.format(MSG, attribute, nodeName));
     }
 }

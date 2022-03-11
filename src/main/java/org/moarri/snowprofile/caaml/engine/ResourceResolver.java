@@ -28,26 +28,19 @@ import java.util.Objects;
  */
 
 
-
 public class ResourceResolver implements LSResourceResolver {
     private static final String XSD_PATH = "/resources/xsd";
     private static final String XSD_GML_FILE_NAME = "CAAMLv6_SnowProfileIACS_GML.xsd";
 
-
-    public ResourceResolver() {
-    }
-
     @Override
-    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
-
+    public LSInput resolveResource(final String type, final String namespaceURI, final String publicId, final String systemId, final String baseURI) {
         Objects.requireNonNull(systemId, String.format("Systemid for required xsd file is null (%s, %s", namespaceURI, publicId));
-        String[] parts = systemId.split("/");
-        String version = parts.length>=2 ? parts[parts.length-2] : "";
-        String fileName = parts.length>=1 ? parts[parts.length-1] : "";
-        String xsdPath = fileName.equals(XSD_GML_FILE_NAME) ? XSD_PATH+"/"+version.replace('.','_')+"/"+XSD_GML_FILE_NAME : "";
-        InputStream resourceAsStream = ResourceResolver.class.getResourceAsStream(xsdPath);
+        final String[] parts = systemId.split("/");
+        final String version = parts.length>=2 ? parts[parts.length-2] : "";
+        final String fileName = parts.length>=1 ? parts[parts.length-1] : "";
+        final String xsdPath = fileName.equals(XSD_GML_FILE_NAME) ? XSD_PATH+"/"+version.replace('.','_')+"/"+XSD_GML_FILE_NAME : "";
+        final InputStream resourceAsStream = ResourceResolver.class.getResourceAsStream(xsdPath);
         Objects.requireNonNull(resourceAsStream, String.format("Could not find the specified xsd file: %s", systemId));
         return new Input(publicId, systemId, resourceAsStream);
     }
-
 }

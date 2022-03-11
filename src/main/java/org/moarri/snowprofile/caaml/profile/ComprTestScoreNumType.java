@@ -17,13 +17,17 @@
 
 package org.moarri.snowprofile.caaml.profile;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public enum ComprTestScoreNumType implements CodeableEnum {
+@Getter
+@RequiredArgsConstructor
+public enum ComprTestScoreNumType implements CodeableEnum<ComprTestScoreNumType> {
     CT_0("0"),
     CT_01("1"),
     CT_02("2"),
@@ -56,16 +60,5 @@ public enum ComprTestScoreNumType implements CodeableEnum {
     CT_29("29"),
     CT_30("30");
 
-    private String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    ComprTestScoreNumType(String code) {
-        this.code = code;
-    }
-
-
+    private final String code;
 }

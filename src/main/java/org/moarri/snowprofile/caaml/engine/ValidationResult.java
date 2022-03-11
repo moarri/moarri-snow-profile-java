@@ -17,35 +17,22 @@
 
 package org.moarri.snowprofile.caaml.engine;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
+@Getter
+@RequiredArgsConstructor
 public class ValidationResult {
     private final ValidationResultType resultType;
     private final CaamlVersion version;
     private final String msg;
 
-    public ValidationResultType getResultType() {
-        return resultType;
-    }
-
-    public CaamlVersion getVersion() {
-        return version;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public ValidationResult(ValidationResultType resultType, CaamlVersion version, String msg) {
-        this.resultType = resultType;
-        this.version = version;
-        this.msg = msg;
-    }
-
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

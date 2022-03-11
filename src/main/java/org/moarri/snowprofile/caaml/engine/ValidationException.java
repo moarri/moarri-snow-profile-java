@@ -24,7 +24,7 @@ import org.moarri.snowprofile.caaml.profile.CaamlException;
  */
 
 public class ValidationException extends CaamlException {
-    public ValidationException(ValidationResult validationResult) {
+    public ValidationException(final ValidationResult validationResult) {
         super(validationResult.getMsg());
     }
 }

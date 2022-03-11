@@ -17,30 +17,24 @@
 
 package org.moarri.snowprofile.caaml.engine;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
+@Getter
+@RequiredArgsConstructor
 public enum CaamlVersion {
     V_6_0_0("v6.0.0"),
     V_6_0_1("v6.0.1"),
     V_6_0_2("v6.0.2"),
     V_6_0_3("v6.0.3");
 
-    private String versionString;
-
-
-    public String getVersionString() {
-        return versionString;
-    }
-
-    CaamlVersion(String versionString) {
-        this.versionString = versionString;
-    }
+    private final String versionString;
 
     public static CaamlVersion getActualVersion(){
         return V_6_0_3;
     }
-
-
 }

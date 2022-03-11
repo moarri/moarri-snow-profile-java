@@ -61,8 +61,5 @@ public class CaamlProfileReaderTest {
                 fail(e.getMessage());
             }
         }
-
     }
-
-
 }

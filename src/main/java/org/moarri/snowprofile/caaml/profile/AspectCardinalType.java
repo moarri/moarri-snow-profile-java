@@ -16,14 +16,17 @@
  */
 package org.moarri.snowprofile.caaml.profile;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
  *
  * @author Kuba Radliński
  */
-public enum AspectCardinalType implements CodeableEnum {
-
+@Getter
+@RequiredArgsConstructor
+public enum AspectCardinalType implements CodeableEnum<AspectCardinalType > {
     N("N"),
     NE("NE"),
     E("E"),
@@ -34,15 +37,4 @@ public enum AspectCardinalType implements CodeableEnum {
     NW("NW"),
     N_A("n/a");
     private final String code;
-
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    AspectCardinalType(String code) {
-        this.code = code;
-    }
-
-
 }
