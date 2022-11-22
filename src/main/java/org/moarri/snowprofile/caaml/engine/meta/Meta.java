@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Moarri Project
+ * Copyright (c) 2022 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,20 +15,12 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.engine;
-
-import org.moarri.snowprofile.caaml.engine.parser.nodes.CaamlException;
-
-import java.text.MessageFormat;
+package org.moarri.snowprofile.caaml.engine.meta;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public class WrongAttrValueException extends CaamlException {
-    private static final String MSG="Wrong attribute: {0} value <{1}> for node: {2}. Required: <{3}>";
-
-    public WrongAttrValueException(final String attrName, final String value, final String nodeName, final String expectedValue) {
-        super(MessageFormat.format(MSG, attrName, value, nodeName, expectedValue));
-    }
+public interface Meta {
+    String value();
 }

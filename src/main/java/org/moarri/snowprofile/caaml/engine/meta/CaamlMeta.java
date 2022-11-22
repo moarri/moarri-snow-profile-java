@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Moarri Project
+ * Copyright (c) 2022 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,26 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.profile;
+package org.moarri.snowprofile.caaml.engine.meta;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public abstract class CaamlException extends Exception {
-    public CaamlException() {
+class CaamlMeta {
+    public enum SnowProfileType  {
     }
 
-    public CaamlException(final String message) {
-        super(message);
+    public static class SnowProfileResultsOf{
+        static final String MAIN_NODE="caaml:snowProfileResultsOf";
+        static final String CHILD_SNOW_PROFILE_MEASUREMENTS = "caaml:SnowProfileMeasurements";
+
     }
 
-    public CaamlException(final String message, final Throwable cause) {
-        super(message, cause);
+    public static class SnowProfileMeasurementsType{
+        static final String MAIN_NODE = "caaml:SnowProfileMeasurements";
+        static final String ATTR_DIR = "dir";
+        static final String CHILD_PROFILE_DEPTH = "caaml:profileDepth";
     }
 
-    public CaamlException(final Throwable cause) {
-        super(cause);
-    }
 }

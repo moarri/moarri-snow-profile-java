@@ -21,7 +21,7 @@ package org.moarri.snowprofile.adds;
  * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-import org.moarri.snowprofile.caaml.engine.nodetools.NullCodeValueException;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.NullCodeValueException;
 import org.moarri.snowprofile.caaml.profile.HardnessType;
 
 import java.util.AbstractMap;

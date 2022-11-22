@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2022 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,16 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.engine.nodetools;
-
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+package org.moarri.snowprofile.caaml.engine.parser.nodes;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
 
-public class AttributeProcessor {
-    public static String trimAttribute(final String attr) {
-        return isNotEmpty(attr) ? attr.trim() : EMPTY;
+public class CaamlClassException extends CaamlException {
+
+    public CaamlClassException(final Throwable cause) {
+        super(cause);
     }
+    
 }

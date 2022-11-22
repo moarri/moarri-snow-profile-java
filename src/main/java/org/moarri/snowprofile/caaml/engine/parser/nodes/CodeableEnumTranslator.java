@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Moarri Project
+ * Copyright (c) 2022 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.engine.nodetools;
+package org.moarri.snowprofile.caaml.engine.parser.nodes;
 
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 import org.moarri.snowprofile.caaml.baseenum.EnumValueProvider;

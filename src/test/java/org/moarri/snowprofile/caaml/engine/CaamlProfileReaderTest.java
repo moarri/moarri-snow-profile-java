@@ -18,7 +18,7 @@
 package org.moarri.snowprofile.caaml.engine;
 
 import org.junit.Test;
-import org.moarri.snowprofile.caaml.profile.CaamlException;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.CaamlException;
 import org.moarri.snowprofile.caaml.profile.SnowProfileType;
 
 import java.io.IOException;

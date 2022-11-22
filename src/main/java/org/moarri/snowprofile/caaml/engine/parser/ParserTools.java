@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Moarri Project
+ * Copyright (c) 2022 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,16 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.engine.nodetools;
+package org.moarri.snowprofile.caaml.engine.parser;
 
-import org.moarri.snowprofile.caaml.profile.CaamlException;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 /**
- * @author Kuba Radliński <kuba at radlinski.eu >
+ * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public class NonExistingCodeException extends CaamlException {
-    public NonExistingCodeException(final Class enumClass, final String code) {
-        super("Non exisiting code '"+code+"' for class:"+enumClass.getCanonicalName());
-    }
+public class ParserTools {
 }

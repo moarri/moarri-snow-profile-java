@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Moarri Project
+ * Copyright (c) 2022 Moarri Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,25 @@
  *
  */
 
-package org.moarri.snowprofile.caaml.engine;
-
-import org.moarri.snowprofile.caaml.profile.CaamlException;
-import org.w3c.dom.Node;
+package org.moarri.snowprofile.caaml.engine.parser.nodes;
 
 /**
  * @author Kuba Radliński <kuba at radlinski.eu>
  */
 
-public interface CustomMetaDataParser<E> {
-    E parseNode(Node node) throws CaamlException;
+public abstract class CaamlException extends Exception {
+    public CaamlException() {
+    }
+
+    public CaamlException(final String message) {
+        super(message);
+    }
+
+    public CaamlException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public CaamlException(final Throwable cause) {
+        super(cause);
+    }
 }

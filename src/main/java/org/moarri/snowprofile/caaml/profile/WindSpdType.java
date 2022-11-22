@@ -16,6 +16,8 @@
  */
 package org.moarri.snowprofile.caaml.profile;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 
 /**
@@ -23,6 +25,7 @@ import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
  * @author Kuba Radliński
  */
 
+@RequiredArgsConstructor
 public enum WindSpdType implements CodeableEnum {
 
     C("C"),
@@ -37,10 +40,4 @@ public enum WindSpdType implements CodeableEnum {
     public String getCode() {
         return code;
     }
-
-    WindSpdType(String code) {
-        this.code = code;
-    }
-
-
 }

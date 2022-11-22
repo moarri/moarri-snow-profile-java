@@ -18,8 +18,8 @@
 package org.moarri.snowprofile.iacs;
 
 import org.junit.Test;
-import org.moarri.snowprofile.caaml.engine.nodetools.NonExistingCodeException;
-import org.moarri.snowprofile.caaml.engine.nodetools.NullCodeValueException;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.NonExistingCodeException;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.NullCodeValueException;
 import org.moarri.snowprofile.caaml.baseenum.CodeableEnum;
 import org.moarri.snowprofile.caaml.baseenum.EnumValueProvider;
 

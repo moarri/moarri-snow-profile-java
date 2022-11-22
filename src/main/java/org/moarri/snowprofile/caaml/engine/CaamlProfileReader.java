@@ -23,9 +23,11 @@ import java.util.Optional;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.moarri.snowprofile.caaml.engine.nodetools.AttributeMissingException;
-import org.moarri.snowprofile.caaml.engine.nodetools.CodeableEnumTranslator;
-import org.moarri.snowprofile.caaml.engine.nodetools.MeasurementTypeTranslator;
+import org.moarri.snowprofile.caaml.engine.parser.SnowProfileParser;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.CodeableEnumTranslator;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.MeasurementTypeTranslator;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.CaamlException;
+import org.moarri.snowprofile.caaml.engine.parser.CustomMetaDataParser;
 import org.moarri.snowprofile.caaml.profile.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -37,9 +39,7 @@ import org.xml.sax.SAXException;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static javax.xml.parsers.DocumentBuilderFactory.newInstance;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.moarri.snowprofile.caaml.engine.CaamlValidator.validateCaaml;
-import static org.moarri.snowprofile.caaml.engine.NodeUtils.*;
 import static org.moarri.snowprofile.caaml.engine.ValidationResultType.VALIDATION_OK;
 
 /**
@@ -47,7 +47,13 @@ import static org.moarri.snowprofile.caaml.engine.ValidationResultType.VALIDATIO
  * @author Kuba Radliński
  */
 public class CaamlProfileReader {
-    CustomMetaDataParser snowProfileMetaDataParser = null;
+    private final CustomMetaDataParser snowProfileMetaDataParser;
+    private final SnowProfileParser snowProfileParser;
+
+    public CaamlProfileReader() {
+        snowProfileMetaDataParser = null;
+        snowProfileParser = new SnowProfileParser();
+    }
 
     public Optional<SnowProfileType> readCaamlString(final String s) throws CaamlException {
         final ValidationResult validationResult = validateCaaml(s);
@@ -71,75 +77,65 @@ public class CaamlProfileReader {
         try {
             final Document doc = factory.newDocumentBuilder().parse(is);
             removeWhitespace(doc.getDocumentElement());
-            return parseSnowProfile(doc.getDocumentElement());
+            return snowProfileParser.parseSnowProfile(doc.getDocumentElement());
         } catch (SAXException | IOException | ParserConfigurationException ex) {
             throw new XmlProcessingException(ex);
         }
     }
 
-
-    private SnowProfileType parseSnowProfile(final Element e) throws CaamlException {
-        if(!CaamlMeta.SnowProfileType.MAIN_NODE.equals(e.getNodeName())){
-            throw new WrongNodeException(CaamlMeta.SnowProfileType.MAIN_NODE, e.getNodeName());
+//    private SnowProfileResultsOf parseSnowProfileResultsOf(final Node parentNode) throws CaamlException {
+//        final Node node = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_SNOW_PROFILE_RESULTS_OF);
+//        if(!CaamlMeta.SnowProfileResultsOf.MAIN_NODE.equals(node.getNodeName())){
+//            throw new WrongNodeException(CaamlMeta.SnowProfileResultsOf.MAIN_NODE, node.getNodeName());
+//        }
+//        return new SnowProfileResultsOf(parseSnowProfileMeasurements(node));
+//    }
+//
+//    private TimeRef parseTimeRef(final Node parentNode) throws CaamlException {
+//        Node timeRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_TIME_REF);
+//        return new TimeRef();
+//    }
+//
+//    private SnowProfileMeasurementsType parseSnowProfileMeasurements(final Node parentNode) throws CaamlException {
+//        final Node node = findMandatoryNode(parentNode, CaamlMeta.SnowProfileResultsOf.CHILD_SNOW_PROFILE_MEASUREMENTS);
+//        final DirectionType dir = CodeableEnumTranslator.fromAttribute(DirectionType.class, (Element) node, CaamlMeta.SnowProfileMeasurementsType.ATTR_DIR);
+//        if(dir != DirectionType.TOP_DOWN){
+//            throw new WrongAttrValueException(CaamlMeta.SnowProfileMeasurementsType.ATTR_DIR, dir.getCode(), node.getNodeName(), DirectionType.TOP_DOWN.getCode());
+//        }
+//        return SnowProfileMeasurementsType.builder(dir)
+//                .withProfileDepth(parseProfileDepth(node))
+//                .build();
+//    }
+//
+//    private MeasureLengthCmType parseProfileDepth(final Node parentNode) throws CaamlException {
+//        final Optional<Node> node = findChildNode(parentNode, CaamlMeta.SnowProfileMeasurementsType.CHILD_PROFILE_DEPTH);
+//        return node.isEmpty() ? null : MeasurementTypeTranslator.fromDomElement(MeasureLengthCmType.class, UomLengthType.class, (Element) node.get());
+//    }
+//
+//    private SrcRef parseSrcRef(final Node parentNode) throws CaamlException {
+//        final Node srcRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_SRC_REF);
+//        return new SrcRef();
+//    }
+//
+//    private LocRef parseLocRef(final Node parentNode) throws CaamlException {
+//        final Node locRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_LOC_REF);
+//        return new LocRef();
+//    }
+//
+    public static void removeWhitespace(Element e) {
+        NodeList children = e.getChildNodes();
+        if (children.getLength() <= 1) {
+            return ;
         }
-        if(!e.hasAttribute(CaamlMeta.SnowProfileType.ATTR_GML_ID)){
-            throw new AttributeMissingException(CaamlMeta.SnowProfileType.ATTR_GML_ID, e.getNodeName());
+        for (int i = children.getLength() - 1; i > -0; i--) {
+            Node child = children.item(i);
+            if (child instanceof Text && ((Text) child).getData().trim().length() == 0) {
+                e.removeChild(child);
+            } else if (child instanceof Element) {
+                removeWhitespace((Element) child);
+            }
         }
-        final String id = e.getAttribute(CaamlMeta.SnowProfileType.ATTR_GML_ID);
-        final TimeRef timeRef = parseTimeRef(e);
-        final SnowProfileResultsOf snowProfileResultsOf = parseSnowProfileResultsOf(e);
-        final SrcRef srcRef = parseSrcRef(e);
-        final LocRef locRef = parseLocRef(e);
-        final MetaDataBaseType metaData = findChildNode(e, CaamlMeta.SnowProfileType.CHILD_META_DATA)
-                .flatMap(n -> of(new MetaDataBaseType()))
-                .orElse(null);
-        final String application = parseTextNode(e, CaamlMeta.SnowProfileType.CHILD_APPLICATION).orElse(EMPTY);
-        final String applicationVersion = parseTextNode(e, CaamlMeta.SnowProfileType.CHILD_APPLICATION_VERSION).orElse(EMPTY);
-        return SnowProfileType.builder(id, timeRef, srcRef, locRef, snowProfileResultsOf)
-                .withMetaData(metaData)
-                .withApplicationInfo(application,applicationVersion)
-                .build();
     }
-
-    private SnowProfileResultsOf parseSnowProfileResultsOf(final Node parentNode) throws CaamlException {
-        final Node node = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_SNOW_PROFILE_RESULTS_OF);
-        if(!CaamlMeta.SnowProfileResultsOf.MAIN_NODE.equals(node.getNodeName())){
-            throw new WrongNodeException(CaamlMeta.SnowProfileResultsOf.MAIN_NODE, node.getNodeName());
-        }
-        return new SnowProfileResultsOf(parseSnowProfileMeasurements(node));
-    }
-
-    private TimeRef parseTimeRef(final Node parentNode) throws CaamlException {
-        Node timeRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_TIME_REF);
-        return new TimeRef();
-    }
-
-    private SnowProfileMeasurementsType parseSnowProfileMeasurements(final Node parentNode) throws CaamlException {
-        final Node node = findMandatoryNode(parentNode, CaamlMeta.SnowProfileResultsOf.CHILD_SNOW_PROFILE_MEASUREMENTS);
-        final DirectionType dir = CodeableEnumTranslator.fromAttribute(DirectionType.class, (Element) node, CaamlMeta.SnowProfileMeasurementsType.ATTR_DIR);
-        if(dir != DirectionType.TOP_DOWN){
-            throw new WrongAttrValueException(CaamlMeta.SnowProfileMeasurementsType.ATTR_DIR, dir.getCode(), node.getNodeName(), DirectionType.TOP_DOWN.getCode());
-        }
-        return SnowProfileMeasurementsType.builder(dir)
-                .withProfileDepth(parseProfileDepth(node))
-                .build();
-    }
-
-    private MeasureLengthCmType parseProfileDepth(final Node parentNode) throws CaamlException {
-        final Optional<Node> node = findChildNode(parentNode, CaamlMeta.SnowProfileMeasurementsType.CHILD_PROFILE_DEPTH);
-        return node.isEmpty() ? null : MeasurementTypeTranslator.fromDomElement(MeasureLengthCmType.class, UomLengthType.class, (Element) node.get());
-    }
-
-    private SrcRef parseSrcRef(final Node parentNode) throws CaamlException {
-        final Node srcRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_SRC_REF);
-        return new SrcRef();
-    }
-
-    private LocRef parseLocRef(final Node parentNode) throws CaamlException {
-        final Node locRefNode = findMandatoryNode(parentNode, CaamlMeta.SnowProfileType.CHILD_LOC_REF);
-        return new LocRef();
-    }
-
 
 
 
@@ -664,22 +660,5 @@ public class CaamlProfileReader {
 //        return snowProfile;
 //    }
     
-    
-    
-    private static void removeWhitespace(Element e) {
-        NodeList children = e.getChildNodes();
-        if (children.getLength() <= 1) {
-            return ;
-        }
-        for (int i = children.getLength() - 1; i > -0; i--) {
-            Node child = children.item(i);
-            if (child instanceof Text && ((Text) child).getData().trim().length() == 0) {
-                e.removeChild(child);
-                
-            } else if (child instanceof Element) {
-                removeWhitespace((Element) child);
-            }
-        }
-    }   
-    
+
 }

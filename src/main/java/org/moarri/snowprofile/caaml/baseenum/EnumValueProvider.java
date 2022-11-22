@@ -17,8 +17,8 @@
 
 package org.moarri.snowprofile.caaml.baseenum;
 
-import org.moarri.snowprofile.caaml.engine.nodetools.NonExistingCodeException;
-import org.moarri.snowprofile.caaml.engine.nodetools.NullCodeValueException;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.NonExistingCodeException;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.NullCodeValueException;
 
 import java.util.Arrays;
 

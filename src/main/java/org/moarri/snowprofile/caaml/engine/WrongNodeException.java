@@ -17,7 +17,8 @@
 
 package org.moarri.snowprofile.caaml.engine;
 
-import org.moarri.snowprofile.caaml.profile.CaamlException;
+import org.moarri.snowprofile.caaml.engine.meta.Meta;
+import org.moarri.snowprofile.caaml.engine.parser.nodes.CaamlException;
 
 import java.text.MessageFormat;
 
@@ -28,7 +29,7 @@ import java.text.MessageFormat;
 public class WrongNodeException extends CaamlException {
     private static final String MSG="Wrong node. Expected: {0}, actual: {1}";
 
-    public WrongNodeException(final String expected, final String actual) {
-        super(MessageFormat.format(MSG, expected, actual));
+    public WrongNodeException(final Meta expected, final String actual) {
+        super(MessageFormat.format(MSG, expected.value(), actual));
     }
 }

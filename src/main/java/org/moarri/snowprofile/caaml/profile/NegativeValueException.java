@@ -17,6 +17,8 @@
 
 package org.moarri.snowprofile.caaml.profile;
 
+import org.moarri.snowprofile.caaml.engine.parser.nodes.CaamlException;
+
 /**
  * @author Kuba Radliński <kuba at radlinski.eu >
  */
